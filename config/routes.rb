@@ -1,4 +1,14 @@
 Elpollon::Application.routes.draw do
+
+  resources :teams
+
+  resources :cups do
+    resources :rounds do
+    end
+  end
+  
+  resources :games
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

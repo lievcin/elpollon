@@ -3,6 +3,16 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
+gem 'json'
+gem 'twitter-bootstrap-rails'
+gem 'active_link_to'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
+gem 'quiet_assets'
+gem 'thin'
+gem 'simple_form'
+gem 'country_select'
+gem 'protected_attributes'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 
