@@ -9,6 +9,6 @@ class Round < ActiveRecord::Base
 	validates_uniqueness_of		:name, :scope => :cup_id
 	validates :leg,		:presence => true
 	validates :cup_id,	:presence => true
-	#validates :round_type,	:presence => true
+	validates :round_type,	:presence => true
 
 end

@@ -1,6 +1,6 @@
-class RoundsController < ApplicationController
+# -*- coding: utf-8 -*-
 
-  #before_filter :authenticate_user!
+class RoundsController < ApplicationController
 	
 	def index
 		@title = "Rounds"
