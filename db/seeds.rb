@@ -1,7 +1,55 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#encoding: utf-8
+Cup.delete_all
+Game.delete_all
+Round.delete_all
+Team.delete_all
+
+cup1 = Cup.create( :name => "Colombia - Apertura 2014", :description => 'El Torneo Apertura 2014 será la septuagésima novena (79a.) edición de la Categoría Primera A de fútbol profesional colombiano, siendo el primer torneo de la temporada 2014. Comenzará a disputarse el 25 de enero y finalizará el 21 de mayo de 2014.' )
+
+round1 = Round.create(:name 	=> "1a Fecha - Todos contra todos", :leg 	=> 1, :cup_id => cup1.id, :round_type => "group")
+round2 = Round.create(:name 	=> "2a Fecha - Todos contra todos", :leg 	=> 2, :cup_id => cup1.id, :round_type => "group")
+round3 = Round.create(:name 	=> "3a Fecha - Todos contra todos", :leg 	=> 3, :cup_id => cup1.id, :round_type => "group")
+round4 = Round.create(:name 	=> "4a Fecha - Todos contra todos", :leg 	=> 4, :cup_id => cup1.id, :round_type => "group")
+round5 = Round.create(:name 	=> "5a Fecha - Todos contra todos", :leg 	=> 5, :cup_id => cup1.id, :round_type => "group")
+round6 = Round.create(:name 	=> "6a Fecha - Todos contra todos", :leg 	=> 6, :cup_id => cup1.id, :round_type => "group")
+round7 = Round.create(:name 	=> "7a Fecha - Todos contra todos", :leg 	=> 7, :cup_id => cup1.id, :round_type => "group")
+round8 = Round.create(:name 	=> "8a Fecha - Todos contra todos", :leg 	=> 8, :cup_id => cup1.id, :round_type => "group")
+round9 = Round.create(:name 	=> "9a Fecha - Todos contra todos", :leg 	=> 9, :cup_id => cup1.id, :round_type => "group")
+round10 = Round.create(:name 	=> "10a Fecha - Todos contra todos", :leg 	=> 10, :cup_id => cup1.id, :round_type => "group")
+round11 = Round.create(:name 	=> "11a Fecha - Todos contra todos", :leg 	=> 11, :cup_id => cup1.id, :round_type => "group")
+round12 = Round.create(:name 	=> "12a Fecha - Todos contra todos", :leg 	=> 12, :cup_id => cup1.id, :round_type => "group")
+round13 = Round.create(:name 	=> "13a Fecha - Todos contra todos", :leg 	=> 13, :cup_id => cup1.id, :round_type => "group")
+round14 = Round.create(:name 	=> "14a Fecha - Todos contra todos", :leg 	=> 14, :cup_id => cup1.id, :round_type => "group")
+round15 = Round.create(:name 	=> "15a Fecha - Todos contra todos", :leg 	=> 15, :cup_id => cup1.id, :round_type => "group")
+round16 = Round.create(:name 	=> "16a Fecha - Todos contra todos", :leg 	=> 16, :cup_id => cup1.id, :round_type => "group")
+round17 = Round.create(:name 	=> "17a Fecha - Todos contra todos", :leg 	=> 17, :cup_id => cup1.id, :round_type => "group")
+round18 = Round.create(:name 	=> "18a Fecha - Todos contra todos", :leg 	=> 18, :cup_id => cup1.id, :round_type => "group")
+
+team1 = Team.create(	:name 	=> "Patriotas Boyaca S.A", :acronym => "PAT", :country => "Colombia")
+team2 = Team.create(	:name 	=> "Deportivo Cali", :acronym => "CAL", :country => "Colombia")
+team3 = Team.create(	:name 	=> "Boyaca Chico", :acronym => "CHI", :country => "Colombia")
+team4 = Team.create(	:name 	=> "Itagui", :acronym => "ITA", :country => "Colombia")
+team5 = Team.create(	:name 	=> "Envigado", :acronym => "ENV", :country => "Colombia")
+team6 = Team.create(	:name 	=> "Equidad", :acronym => "EQU", :country => "Colombia")
+team7 = Team.create(	:name 	=> "Atletico Huila", :acronym => "HUI", :country => "Colombia")
+team8 = Team.create(	:name 	=> "Atletico Junior", :acronym => "JUN", :country => "Colombia")
+team9 = Team.create(	:name 	=> "Independiente Medellin", :acronym => "MED", :country => "Colombia")
+team10 = Team.create(	:name 	=> "Millonarios F.C.", :acronym => "MIL", :country => "Colombia")
+team11 = Team.create(	:name 	=> "Atletico Nacional", :acronym => "NAC", :country => "Colombia")
+team12 = Team.create(	:name 	=> "Once Caldas", :acronym => "ONC", :country => "Colombia")
+team13 = Team.create(	:name 	=> "Deportivo Pasto", :acronym => "PAS", :country => "Colombia")
+team14 = Team.create(	:name 	=> "Alianza Petrolera", :acronym => "ALI", :country => "Colombia")
+team15 = Team.create(	:name 	=> "Deportes Tolima", :acronym => "TOL", :country => "Colombia")
+team16 = Team.create(	:name 	=> "Santa Fe", :acronym => "SFE", :country => "Colombia")
+team17 = Team.create(	:name 	=> "Uni. Autonoma del Caribe", :acronym => "UAC", :country => "Colombia")
+team18 = Team.create(	:name 	=> "Fortaleza F.C", :acronym => "FOR", :country => "Colombia")
+
+game1 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team17.id, :away_team_id => team15.id)
+game2 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team5.id, :away_team_id => team10.id)
+game3 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team6.id, :away_team_id => team14.id)
+game4 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team3.id, :away_team_id => team2.id)
+game5 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team11.id, :away_team_id => team9.id)
+game6 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team13.id, :away_team_id => team1.id)
+game7 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team12.id, :away_team_id => team18.id)
+game8 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team16.id, :away_team_id => team4.id)
+game9 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team7.id, :away_team_id => team8.id)
