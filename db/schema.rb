@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140109194210) do
+ActiveRecord::Schema.define(version: 20140110091718) do
 
   create_table "cups", force: true do |t|
     t.string   "name"
@@ -65,9 +65,9 @@ ActiveRecord::Schema.define(version: 20140109194210) do
   create_table "teams", force: true do |t|
     t.string   "name"
     t.string   "acronym"
-    t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
   end
 
   create_table "users", force: true do |t|
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(version: 20140109194210) do
     t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
+    t.string   "gender"
+    t.string   "location"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
   end
 
 end

@@ -13,15 +13,19 @@ Elpollon::Application.routes.draw do
     resources :rounds do
     end
   end
-  
+
   resources :games
-  
+
   resources :polls do
     collection do
       get :kick_out
       get :invite
     end
   end
+
+  get "auth/:provider/callback", to: "sessions#create"
+  get "auth/failure", to: redirect("/")
+  get "signout", to: "sessions#destroy", as: "signout"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
