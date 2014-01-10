@@ -6,7 +6,7 @@ class PollsController < ApplicationController
 
 	def new
 		@title = "New poll"
-		@user = User.find_by_name("Liev") #This needs to be changed to current_user once developed
+		@user = current_user
 		@poll = Poll.new
 		@poll.admin_id = @user.id
 	end
@@ -15,13 +15,13 @@ class PollsController < ApplicationController
 		@title = "Poll view"
 		@poll = Poll.find(params[:id])
 		@admin = User.find(@poll.admin_id)
-		@user = User.find_by_name("Liev") #This needs to be changed to current_user once developed		
+		@user = current_user
 		@members = @poll.users
 	end
 
 	def edit
 		@title = "Poll edit"
-		@user = User.find_by_name("Liev") #This needs to be changed to current_user once developed
+		@user = current_user
 		@poll = Poll.find(params[:id])
 		if @poll.admin_id != @user.id
 			flash[:error] = "The poll can only be edited by the administrator!"
@@ -36,7 +36,7 @@ class PollsController < ApplicationController
 
 	def create
 		@poll = Poll.new(params[:poll])
-		@user = User.find_by_name("Liev") #This needs to be changed to current_user once developed
+		@user = current_user
 		if @poll.save
 		  @user.polls << @poll
 			flash[:success] = "Poll created successfully"
@@ -84,7 +84,7 @@ class PollsController < ApplicationController
 				redirect_to :back
 			else
 				unless @password.nil?
-					if @password === @poll.password
+					if @password === @poll.password and @poll.users.include?(@user) == false
 						@user.polls << @poll
 						flash[:success] = "Joined the poll!"
 						#Post.create(	headline: "New member", 
@@ -106,4 +106,5 @@ class PollsController < ApplicationController
 
 	def kick_out
     #something to be set up here... 
+  end
 end

@@ -13,14 +13,14 @@ class Game < ActiveRecord::Base
 	validates :kickoff, 	:presence => true
 	validates :home_team_id,	:presence => true
 	validates :away_team_id,	:presence => true
-	#validates_numericality_of :home_score, :only_integer => true, :allow_nil => true
-	#validates_numericality_of :away_score, :only_integer => true, :allow_nil => true
-	#validates_numericality_of :home_score_et, :only_integer => true, :allow_nil => true
-	#validates_numericality_of :away_score_et, :only_integer => true, :allow_nil => true
-	#validates_numericality_of :home_score_pt, :only_integer => true, :allow_nil => true
-	#validates_numericality_of :away_score_pt, :only_integer => true, :allow_nil => true
-	#validates_numericality_of :home_win, :only_integer => true, :allow_nil => true
-	#validates_numericality_of :away_win, :only_integer => true, :allow_nil => true
+	validates_numericality_of :home_score, :only_integer => true, :allow_nil => true
+	validates_numericality_of :away_score, :only_integer => true, :allow_nil => true
+	validates_numericality_of :home_score_et, :only_integer => true, :allow_nil => true
+	validates_numericality_of :away_score_et, :only_integer => true, :allow_nil => true
+	validates_numericality_of :home_score_pt, :only_integer => true, :allow_nil => true
+	validates_numericality_of :away_score_pt, :only_integer => true, :allow_nil => true
+	validates_numericality_of :home_win, :only_integer => true, :allow_nil => true
+	validates_numericality_of :away_win, :only_integer => true, :allow_nil => true
 	
 end
 

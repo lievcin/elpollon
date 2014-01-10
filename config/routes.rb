@@ -1,5 +1,9 @@
 Elpollon::Application.routes.draw do
 
+  resources :bets
+
+  resources :posts
+
   root :to => 'pages#home'
 
   get 'admin', :to => 'pages#admin'

@@ -15,7 +15,7 @@
 <% @polls.each do |poll| %>
     <tr>
         <td><%= poll.name %></td>
-        <td><%= User.find(poll.admin_id).username  %></td>
+        <td><%= User.find(poll.admin_id).name  %></td>
         <td><%= poll.password %></td>
         <td><%= poll.created_at.strftime("%d.%m.%y") %></td>
         <td><%= poll.users.count %></td>

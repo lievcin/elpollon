@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @bet.user_id %>
+</p>
+
+<p>
+  <strong>Poll:</strong>
+  <%= @bet.poll_id %>
+</p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @bet.game_id %>
+</p>
+
+<p>
+  <strong>Home bet:</strong>
+  <%= @bet.home_bet %>
+</p>
+
+<p>
+  <strong>Away bet:</strong>
+  <%= @bet.away_bet %>
+</p>
+
+<p>
+  <strong>Home bet pt:</strong>
+  <%= @bet.home_bet_pt %>
+</p>
+
+<p>
+  <strong>Away bet pt:</strong>
+  <%= @bet.away_bet_pt %>
+</p>
+
+<p>
+  <strong>Total points:</strong>
+  <%= @bet.total_points %>
+</p>
+
+<%= link_to 'Edit', edit_bet_path(@bet) %> |
+<%= link_to 'Back', bets_path %>

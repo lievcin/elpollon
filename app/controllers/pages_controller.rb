@@ -4,8 +4,7 @@ class PagesController < ApplicationController
 
 	def home
 		@title = "Homepage"
-		@games = Game.find(:all, :conditions => ["kickoff > ?", Time.now],
-	 							:order => 'kickoff ASC', :limit => 9)
+		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(9)
 
     @user = current_user
 		#if user_signed_in?
@@ -27,13 +26,11 @@ class PagesController < ApplicationController
 
 	def about
 		@title = "About this project"
-		@games = Game.find(:all, :conditions => ["kickoff > ?", Time.now],
-	 							:order => 'kickoff ASC', :limit => 9)
+		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(9)
 	end
 
 	def rules
 		@title = "Rules"
-		@games = Game.find(:all, :conditions => ["kickoff > ?", Time.now],
-	 							:order => 'kickoff ASC', :limit => 9)
+		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(9)	
 	end
 end

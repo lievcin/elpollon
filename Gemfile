@@ -13,6 +13,7 @@ gem 'thin'
 gem 'simple_form'
 gem 'country_select'
 gem 'protected_attributes'
+
 # Use mysql as the database for Active Record
 gem 'mysql2'
 gem 'pg'
