@@ -2,7 +2,7 @@
 	<%# if user_signed_in? %>
 			<div class="span8" id="user_news">
 				<%= render 'shared/poll_menu' %>
-				<% if @user.polls.nil? %>
+				<% if @user && @user.polls.nil? %>
 					<%= render 'news' %>
 				<% else %>
 					<%#= render 'poll_news' %>

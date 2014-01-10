@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 class PagesController < ApplicationController
+	skip_filter :ensure_user, only: [:home]
+
 	def home
 		@title = "Homepage"
 		@games = Game.find(:all, :conditions => ["kickoff > ?", Time.now],
 	 							:order => 'kickoff ASC', :limit => 9)
-    
-    @user = User.find_by_name("Liev") #This needs to be changed to current_user once developed
+
+    @user = current_user
 		#if user_signed_in?
 		#	@user = current_user
 		#	if @user.polls.nil?
