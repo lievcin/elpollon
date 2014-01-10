@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140107191020) do
+ActiveRecord::Schema.define(version: 20140109194210) do
 
   create_table "cups", force: true do |t|
     t.string   "name"
@@ -37,6 +37,21 @@ ActiveRecord::Schema.define(version: 20140107191020) do
     t.datetime "updated_at"
   end
 
+  create_table "polls", force: true do |t|
+    t.string   "name"
+    t.string   "password"
+    t.integer  "admin_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "polls_users", id: false, force: true do |t|
+    t.integer "poll_id"
+    t.integer "user_id"
+  end
+
+  add_index "polls_users", ["poll_id", "user_id"], name: "index_polls_users_on_poll_id_and_user_id", using: :btree
+
   create_table "rounds", force: true do |t|
     t.string   "name"
     t.integer  "leg"
@@ -50,9 +65,9 @@ ActiveRecord::Schema.define(version: 20140107191020) do
   create_table "teams", force: true do |t|
     t.string   "name"
     t.string   "acronym"
+    t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "country"
   end
 
   create_table "users", force: true do |t|

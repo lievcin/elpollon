@@ -3,6 +3,9 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
+      <th>Acronym</th>
+      <th>Country</th>
       <th></th>
       <th></th>
       <th></th>
@@ -12,6 +15,9 @@
   <tbody>
     <% @teams.each do |team| %>
       <tr>
+	    <td><%= team.name %></td>
+	    <td><%= team.acronym %></td>
+	    <td><%= team.country %></td>	
         <td><%= link_to 'Show', team %></td>
         <td><%= link_to 'Edit', edit_team_path(team) %></td>
         <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>

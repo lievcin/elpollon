@@ -1,0 +1,27 @@
+<%= simple_form_for(@poll) do |f| %>
+  <% if @poll.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@poll.errors.count, "error") %> prohibited this poll from being saved:</h2>
+
+      <ul>
+      <% @poll.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+  	<%= f.input :admin_id, :value => @user.id, :as => :hidden%>
+  </div>
+  <div class="field">
+    <%= f.input :name %>
+  </div>
+  <div class="field">
+    <%= f.input :password , :hint => "This will need to be shared with anyone you'd like to invite to join the poll"%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,38 @@
+<div class="row">
+	<div class="span8">
+		<div class="main_content">
+			<h2>Poll <%= @poll.name %></h2>
+
+			<p>Poll Administrator: <%= @admin.name %></p>
+
+			<p><%= @members.count %> Members:</p>
+
+			<ul>
+				<% @members.each do |m| %>
+					<li><%= link_to m.name, user_path(m) %>
+
+					 | <a href="mailto: <%#= m.email %>">E-Mail ???</a>
+						<% if @user.id === @poll.admin_id %>
+								<% unless m.id === @user.id %>
+									 | <%= link_to "Kick out",  kick_out_polls_path(:user_id =>m.id), :confirm => 'Are you sure?' %>
+								<% end %>
+						<% end %>
+					</li>
+				<% end %>
+			</ul>
+			<!--check if a user is signed in to see his options, to be added once fb oauth is set up -->
+				<% if  @user.id === @poll.admin_id %>
+					<h3>Community Admin Options</h3>
+
+					<p>You are the admin of this community!</p>
+
+					<p><%= link_to "Invite people", invite_polls_path, :class => "btn" %></p>
+
+					<p><%= link_to "Change name or password for poll", edit_poll_path, :class => "btn" %></p>
+
+					<p><%= link_to 'Delete poll', @poll, :confirm => 'Are you sure? All other users in the poll will be removed from it as well.', :class => "btn", :method => :delete %></p>
+				<% end %>
+			
+		</div>
+	</div>
+</div>

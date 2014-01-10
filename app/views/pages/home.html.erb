@@ -1,0 +1,26 @@
+<div class="row">
+	<%# if user_signed_in? %>
+			<div class="span8" id="user_news">
+				<%= render 'shared/poll_menu' %>
+				<% if @user.polls.nil? %>
+					<%= render 'news' %>
+				<% else %>
+					<%#= render 'poll_news' %>
+				<% end %>
+			</div>
+	<%# else %>
+		<div class="span8" id="welcome">
+			<div class="hero-unit">
+				<%= render 'welcome' %>
+			</div>
+		</div>
+	<%# end %>
+
+	<div class="span4">
+		<%= render 'next_games' %>
+	</div>
+
+</div>
+
+
+

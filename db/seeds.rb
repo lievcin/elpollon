@@ -3,8 +3,9 @@ Cup.delete_all
 Game.delete_all
 Round.delete_all
 Team.delete_all
+User.delete_all
 
-cup1 = Cup.create( :name => "Colombia - Apertura 2014", :description => 'El Torneo Apertura 2014 será la septuagésima novena (79a.) edición de la Categoría Primera A de fútbol profesional colombiano, siendo el primer torneo de la temporada 2014. Comenzará a disputarse el 25 de enero y finalizará el 21 de mayo de 2014.' )
+cup1 = Cup.create(name: "Colombia - Apertura 2014", :description => 'El Torneo Apertura 2014 será la septuagésima novena (79a.) edición de la Categoría Primera A de fútbol profesional colombiano, siendo el primer torneo de la temporada 2014. Comenzará a disputarse el 25 de enero y finalizará el 21 de mayo de 2014.' )
 
 round1 = Round.create(:name 	=> "1a Fecha - Todos contra todos", :leg 	=> 1, :cup_id => cup1.id, :round_type => "group")
 round2 = Round.create(:name 	=> "2a Fecha - Todos contra todos", :leg 	=> 2, :cup_id => cup1.id, :round_type => "group")
@@ -53,3 +54,8 @@ game6 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team
 game7 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team12.id, :away_team_id => team18.id)
 game8 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team16.id, :away_team_id => team4.id)
 game9 = Game.create(:round_id => round1.id, :kickoff => "2014-01-26", :home_team_id => team7.id, :away_team_id => team8.id)
+
+user1  = User.create(name: "Liev", country: "UK")
+user2  = User.create(name: "Daniel", country: "Israel")
+user3  = User.create(name: "Alisa", country: "UK")
+user4  = User.create(name: "Elena", country: "Israel")

@@ -1,6 +1,13 @@
 Elpollon::Application.routes.draw do
 
+  root :to => 'pages#home'
+
+  get 'admin', :to => 'pages#admin'
+  get 'join',  :to => 'polls#join'
+
+
   resources :teams
+  resources :users
 
   resources :cups do
     resources :rounds do
@@ -8,6 +15,13 @@ Elpollon::Application.routes.draw do
   end
   
   resources :games
+  
+  resources :polls do
+    collection do
+      get :kick_out
+      get :invite
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
