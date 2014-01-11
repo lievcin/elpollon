@@ -28,6 +28,6 @@ Elpollon::Application.configure do
   config.assets.debug = true
 
   # Omniauth
-  ENV['FACEBOOK_APP_ID'] = "1398695313712183"
-  ENV['FACEBOOK_SECRET'] = "d2f7b5aab3c112f8dc5cb7d3e909f592"
+  ENV['FACEBOOK_APP_ID'] = "1435514109999765"
+  ENV['FACEBOOK_SECRET'] = "81b61e2111f7d694ea0db9e13fa510e3"
 end
