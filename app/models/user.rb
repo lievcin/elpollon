@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :country
   has_and_belongs_to_many :polls
+  has_many :bets
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|

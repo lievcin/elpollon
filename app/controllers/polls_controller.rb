@@ -66,12 +66,13 @@ class PollsController < ApplicationController
 
 	def destroy
 		@poll = Poll.find(params[:id])
+		@poll.destroy		
 		flash[:success] = "Poll deleted"
 		redirect_to root_path
 	end
 
 	def join
-		@user = User.find_by_name("Daniel") #This needs to be changed to current_user once developed
+		@user = current_user
 		if params[:poll_search].nil?
 			@poll = nil
 		else
@@ -105,6 +106,13 @@ class PollsController < ApplicationController
 	end
 
 	def kick_out
-    #something to be set up here... 
+  		@poll = Poll.find(params[:poll_id])
+  		@user = User.find(params[:user_id])
+  		@poll.users.delete(@user)
+			flash[:success] = @user.name + " has been kicked out of the poll!"
+  			#Post.create(	headline: "Kicked out player", 
+  			#				category: "com" + @poll.id.to_s,
+  			#				content: @user.name + " was kicked out of the poll by the admin.")
+  		redirect_to @poll
   end
 end
