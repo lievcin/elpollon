@@ -1,8 +1,8 @@
 <div class="row">
 	<%# if user_signed_in? %>
 			<div class="span8" id="user_news">
+				<%= render 'shared/poll_menu' %>
 				<% if @user && @user.polls.nil? %>
-					<%= render 'shared/poll_menu' %>
 					<%= render 'news' %>
 				<% else %>
 					<%#= render 'poll_news' %>

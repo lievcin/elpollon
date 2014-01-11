@@ -14,7 +14,7 @@
 					 | <a href="mailto: <%#= m.email %>">E-Mail ???</a>
 						<% if @user.id === @poll.admin_id %>
 								<% unless m.id === @user.id %>
-									 | <%= link_to "Kick out",  kick_out_polls_path(:user_id =>m.id), :confirm => 'Are you sure?' %>
+									 | <%= link_to "Kick out",  kick_out_polls_path(:poll_id => @poll.id, :user_id =>m.id), :confirm => 'Are you sure?' %>
 								<% end %>
 						<% end %>
 					</li>

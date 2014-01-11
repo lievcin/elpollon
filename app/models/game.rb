@@ -5,6 +5,7 @@ class Game < ActiveRecord::Base
   
 	has_many :bets
 	has_many :users, :through => :bets
+	has_many :polls, :through => :bets	
 	belongs_to :round
 	belongs_to :cup
 	has_many :teams

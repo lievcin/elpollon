@@ -1,5 +1,55 @@
+# -*- coding: utf-8 -*-
 class BetsController < ApplicationController
-  before_action :set_bet, only: [:show, :edit, :update, :destroy]
+  before_filter :ensure_user
+
+  def place_bet
+		@title = "Bet"
+		@user = current_user
+		@bets = @user.bets
+
+		if params[:cup_id].nil?
+			if params[:round_id].nil?
+				@round = get_current_round
+			else
+				@round = Round.find(params[:round_id])
+			end
+			@cup = Cup.find(@round.cup_id)
+		else
+			@cup = Cup.find(params[:cup_id])
+			if params[:round_id].nil?
+				@round = get_current_cup_round
+			else
+				if Round.find(params[:round_id]).cup_id != @cup.id
+					@round = get_current_cup_round
+				else
+					@round = @round = Round.find(params[:round_id])
+				end
+			end
+		end
+
+		@cup_options = Cup.all
+		@round_options = @cup.rounds
+		@games = @round.games.order('kickoff ASC')
+		@bet = Bet.new
+
+		if Round.where(:leg => @round.leg+1).nil?
+			@nextround = nil
+		else
+			@cuprounds = @cup.rounds
+			nextleg = @round.leg+1
+			@nextround = @cuprounds.where(:leg => nextleg).first
+		end
+
+		if Round.where(:leg => @round.leg-1).nil?
+			@previousround = nil
+		else
+			@cuprounds = @cup.rounds
+			previousleg = @round.leg-1
+			@previousround = @cuprounds.where(:leg => previousleg).first
+		end    
+  end
+
+
 
   # GET /bets
   # GET /bets.json
