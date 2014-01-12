@@ -18,6 +18,7 @@
 				<td> - </td>
 				<td><%= truncate(Team.find(game.away_team_id).name, :length => 15) %></td>				
 				  <% game.polls.select{|poll| poll.users.include?(current_user)}.each do |poll| %>
+					<tr>
 					<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, poll.id, game.id) %>
 					<% if @bet.empty? %>
 					<td><%= form_for @new_bet, :remote => true do |f| %>
@@ -39,6 +40,7 @@
 					</td>
 						<% end%>										
 					<% end%>
+					</tr>					
 				<td><%= distance_of_time_in_words(Time.now, game.kickoff) %></td>
 			   </tr>	
 			<% end %>
