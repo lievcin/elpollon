@@ -26,6 +26,8 @@ class PagesController < ApplicationController
 	def main
 		@polls = current_user.polls
 		@games = current_user.games.where("kickoff > ?", Time.now).order(:kickoff).limit(9)
+		@new_bet = Bet.new		
+		#@exist_bet = Bet.find(params[:id])    		
 	end
 	
 	def admin
