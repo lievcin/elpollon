@@ -7,6 +7,7 @@ Elpollon::Application.routes.draw do
   root :to => 'pages#home'
 
   get 'admin', :to => 'pages#admin'
+  get 'main', :to => 'pages#main'  
   get 'join',  :to => 'polls#join'
 
 

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :country
   has_and_belongs_to_many :polls
+  has_many :cups , :through => :polls
+  has_many :games , :through => :cups  
   has_many :bets
 
   def self.from_omniauth(auth)

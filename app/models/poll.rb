@@ -4,6 +4,7 @@ class Poll < ActiveRecord::Base
 	has_and_belongs_to_many :users
 	belongs_to :cup
 	has_many :bets
+	has_many :games, :through => :cup	
 
 	validates :name, :presence => true, :length	=> { :within => 6..30}, :uniqueness => true
   validates :password, :presence => true, :confirmation => true, :length => { :within => 6..20}
