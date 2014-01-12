@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 class PagesController < ApplicationController
+
+  layout 'main', :only => [:main]
+
 	skip_filter :ensure_user, only: [:home]
 
 	def home
@@ -20,6 +23,11 @@ class PagesController < ApplicationController
 		#end
 	end
 
+	def main
+		@polls = current_user.polls
+		@games = current_user.games.where("kickoff > ?", Time.now).order(:kickoff).limit(9)
+	end
+	
 	def admin
 		@title = "Admin Overview"
 	end
