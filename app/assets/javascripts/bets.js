@@ -1,4 +1,5 @@
-$('.submittable').live('change', function() {
+$( document ).on( "change", ".submittable", function() {
+
      $(this).parents('form:first').submit();
      //$(this).css('color', 'red');
      $(this).animate({
@@ -8,7 +9,7 @@ $('.submittable').live('change', function() {
      $(this).animate({
      	color: 'black'
   	}, '800', function() {
-    	
-  });
-});
 
+  });
+
+});

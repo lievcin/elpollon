@@ -19,7 +19,7 @@ class BetsController < ApplicationController
   end
 
   def create
-		@cup = Bet.new(params[:bet])
+		@bet = Bet.new(params[:bet])
 
 		if @bet.save
 			redirect_to :back
