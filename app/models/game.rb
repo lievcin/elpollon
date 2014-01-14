@@ -23,5 +23,37 @@ class Game < ActiveRecord::Base
 	validates_numericality_of :home_win, :only_integer => true, :allow_nil => true
 	validates_numericality_of :away_win, :only_integer => true, :allow_nil => true
 	
+  after_save :assign_points
+
+  protected
+  	
+   	def assign_points 	  
+   	  self.bets.each do |bet|
+ 				p = points_per_game(self.home_score, self.away_score, bet.home_bet, bet.away_bet)
+ 				bet.total_points = p
+ 				bet.save
+ 	    end
+    end
+
+  	def points_per_game(home_score, away_score, home_bet, away_bet)
+  		if home_score == home_bet && away_score == away_bet
+  			return 3
+  		else
+  			if (home_score - away_score) - (home_bet - away_bet) == 0 
+  				if home_score == away_score 
+  					return 1
+  				else
+  					return 2
+  				end
+  			else
+  				if ((home_score - away_score) <=> 0) == ((home_bet - away_bet) <=> 0) 
+  					return 1
+  				else
+  					return 0
+  				end
+  			end
+  		end
+  	end
+  		
 end
 
