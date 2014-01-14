@@ -1,8 +1,6 @@
  # -*- coding: utf-8 -*-
-
 class GamesController < ApplicationController
 
-	#before_filter :authenticate_admin!
 	
 	def index
 		@title = "Overview of games"
@@ -74,7 +72,8 @@ class GamesController < ApplicationController
 
 	def result_index
 		@title = "Results"
-		@games = Game.where( :home_score => nil).order(:kickoff).limit(36)
+		#@games = Game.where("kickoff < ?", Time.now).where(home_score: nil).order(:kickoff).limit(36)
+		@games = Game.where("kickoff < ?", Time.now).order(:kickoff).limit(36)		
 	end
 
 	def fix_result
@@ -95,16 +94,10 @@ class GamesController < ApplicationController
 				bet.save
 				flash[:success] = "Points assigned"
 			end
-			# Spieltagszusammenfassung erstellen, wenn Spieltag vorbei
-			if round_over(@game) == true
-				post_round_summary(@game)
-			end
 
-			head = "#{Team.find(@game.home_team).name} - #{Team.find(@game.away_team).name} #{@game.home_score}:#{@game.away_score}"
-			Post.create(:headline => head, :category => 'System', :content => '[System: Points assigned.]')
 			redirect_to result_index_games_path
 		else
-			flash[:error] = "Fehler!"
+			flash[:error] = "Error!"
 			redirect_to :back
 		end
 	end

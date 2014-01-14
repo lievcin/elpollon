@@ -195,6 +195,15 @@ a:hover {
 
 /* Abgabe-Forms */
 
+input#game_home_score {
+  width: 40px;
+  margin-bottom: 0px;
+}
+input#game_away_score {
+  width: 40px;
+  margin-bottom: 0px;
+}
+
 input#bet_home_bet {
   width: 40px;
   margin-bottom: 0px;
@@ -203,6 +212,7 @@ input#bet_away_bet {
   width: 40px;
   margin-bottom: 0px;
 }
+
 
 form.new_bet {
   margin: 0 0 0px;
