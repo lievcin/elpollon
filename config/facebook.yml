@@ -1,0 +1,13 @@
+development:
+  app_id: 1435514109999765
+  secret_key: 81b61e2111f7d694ea0db9e13fa510e3
+  app_url: //radiant-hamlet-3188.herokuapp.com
+  fb_url: //apps.facebook.com/elpollon
+  channel_url: //radiant-hamlet-3188.herokuapp.com/facebook/channel
+
+production:
+  app_id: 1435514109999765
+  secret_key: 81b61e2111f7d694ea0db9e13fa510e3
+  app_url: //radiant-hamlet-3188.herokuapp.com
+  fb_url: //apps.facebook.com/elpollon
+  channel_url: //radiant-hamlet-3188.herokuapp.com/facebook/channel

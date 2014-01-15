@@ -47,6 +47,8 @@ group :development, :test do
   gem "pry-rails"
 end
 
+gem 'rack-p3p'
+gem 'rack-facebook-signed-request', :git => 'git://github.com/cmer/rack-facebook-signed-request.git'
 gem 'omniauth-facebook'
 
 # Use ActiveModel has_secure_password

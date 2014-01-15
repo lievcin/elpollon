@@ -27,7 +27,7 @@ Elpollon::Application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
@@ -38,6 +38,7 @@ Elpollon::Application.configure do
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
+  config.action_dispatch.default_headers["X-Frame-Options"] = "ALLOW-FROM https://apps.facebook.com"
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
@@ -77,4 +78,8 @@ Elpollon::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+# Omniauth
+  ENV['FACEBOOK_APP_ID'] = "1435514109999765"
+  ENV['FACEBOOK_SECRET'] = "81b61e2111f7d694ea0db9e13fa510e3"
 end
