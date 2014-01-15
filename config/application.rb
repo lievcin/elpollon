@@ -21,7 +21,7 @@ module Elpollon
     # config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = false
 
-    require "#{config.root}/app/lib/ext/hash"
+    require "#{config.root}/lib/ext/hash"
 
     $fb_config      = YAML.load_file("#{config.root}/config/facebook.yml")[Rails.env]
     $fb_app_id      = $fb_config['app_id']
