@@ -20,5 +20,17 @@ module Elpollon
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = false
+
+    require "#{config.root}/app/lib/ext/hash"
+
+    $fb_config      = YAML.load_file("#{config.root}/config/facebook.yml")[Rails.env]
+    $fb_app_id      = $fb_config['app_id']
+    $fb_secret      = $fb_config['secret_key']
+    $fb_app_url     = $fb_config['app_url'] # https://www.varagesale.com
+    $fb_url         = $fb_config['fb_url']  # https://apps.facebook.com/varagesale
+    $fb_channel_url = $fb_config['channel_url']
+
+    # Make Facebook signed_request POSTs behave more RESTfully
+    config.middleware.use Rack::Facebook::SignedRequest, app_id: $fb_app_id, secret: $fb_secret, inject_facebook: false
   end
 end
