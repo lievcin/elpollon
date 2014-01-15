@@ -21,8 +21,6 @@ module Elpollon
     # config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = false
 
-    config.action_dispatch.default_headers[:'X-Frame-Options'] = "ALLOW-FROM https://apps.facebook.com"
-
     require "#{config.root}/lib/ext/hash"
 
     $fb_config      = YAML.load_file("#{config.root}/config/facebook.yml")[Rails.env]
