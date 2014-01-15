@@ -7,8 +7,8 @@ Elpollon::Application.routes.draw do
   root :to => 'pages#home'
 
   get 'admin', :to => 'pages#admin'
+  get 'main', :to => 'pages#main'  
   get 'join',  :to => 'polls#join'
-
 
   resources :teams
   resources :users
@@ -18,8 +18,16 @@ Elpollon::Application.routes.draw do
     end
   end
 
-  resources :games
-
+  resources :games do
+    collection do
+      get :result_index
+    end
+    member do
+      get :fix_result
+      put :save_result
+    end
+  end
+  
   resources :polls do
     collection do
       get :kick_out
