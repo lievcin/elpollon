@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/cmer/rack-facebook-signed-request.git
+  revision: 20284053557f05cc7ea313d818ec5e9aef1c53fb
+  specs:
+    rack-facebook-signed-request (0.2.0)
+      rack
+      rack
+      yajl-ruby
+      yajl-ruby
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -96,6 +106,8 @@ GEM
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
+    rack-p3p (0.5.0)
+      rack (>= 1.0.1)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.0.2)
@@ -158,6 +170,7 @@ GEM
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     will_paginate (3.0.5)
+    yajl-ruby (1.2.0)
 
 PLATFORMS
   ruby
@@ -176,6 +189,8 @@ DEPENDENCIES
   protected_attributes
   pry-rails
   quiet_assets
+  rack-facebook-signed-request!
+  rack-p3p
   rails (= 4.0.2)
   sass-rails (~> 4.0.0)
   sdoc
