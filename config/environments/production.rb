@@ -81,4 +81,6 @@ Elpollon::Application.configure do
 # Omniauth
   ENV['FACEBOOK_APP_ID'] = "1435514109999765"
   ENV['FACEBOOK_SECRET'] = "81b61e2111f7d694ea0db9e13fa510e3"
+
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 end
