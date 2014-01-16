@@ -8,6 +8,7 @@ Elpollon::Application.routes.draw do
 
   get 'admin', :to => 'pages#admin'
   get 'main', :to => 'pages#main'  
+  get 'poll_view', :to => 'pages#poll_view'    
   get 'join',  :to => 'polls#join'
 
   resources :teams

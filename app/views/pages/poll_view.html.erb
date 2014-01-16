@@ -1,0 +1,79 @@
+<div class="span9 offset3">
+	
+	<div class="well">
+		Ranking
+	</div>	
+	<div class="well">
+		<h2>Games in poll</h2>
+		
+		<table class="table table-striped table-condensed">
+			<tr>
+			  <th>Kick-off</th>				
+			  <th>Home</th>
+			  <th>Result</th> 
+			  <th>Bet</th> 			
+			  <th>Away</th>
+			</tr>
+			<% @games.each do |game| %>
+			  <tr>
+				<td><%= game.kickoff.to_formatted_s(:short) %></td>				
+				<td><%= truncate(Team.find(game.home_team_id).name, :length => 15) %></td>
+				<% if game.home_score.nil? %>
+				<td> - :
+				<% else %>
+				<td><%= game.home_score %> :
+				<% end %>	
+				
+				<% if game.away_score.nil? %>
+				- </td>
+				<% else %>
+				<%= game.away_score %> </td>
+				<% end %>
+				
+				<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, params[:poll_id], game.id) %>
+				<% if @bet.empty? %>
+				<td><%= simple_form_for(@new_bet, :remote => true) do |f| %>
+				    <%= f.input :game_id, :value => game.id, :as => :hidden %>
+				    <%= f.input :poll_id, :value => params[:poll_id], :as => :hidden %>
+					<%= f.input :user_id, :value => current_user.id, :as => :hidden %>		
+					<% if game.kickoff < Time.now %>															
+					<%= f.number_field :home_bet, disabled: true %> : 
+					<%= f.number_field :away_bet, disabled: true %> 						
+					<% else %>													
+					<%= f.number_field :home_bet, :class => 'submittable' %> : 
+					<%= f.number_field :away_bet, :class => 'submittable' %> 											
+					<% end %>																											
+				  <% end %> 	
+				</td>													
+				  <% else %>	
+				<td><%= simple_form_for(@bet[0], :remote => true) do |f| %>
+				    <%= f.input :game_id, :value => game.id, :as => :hidden %>
+				    <%= f.input :poll_id, :value => params[:poll_id], :as => :hidden %>
+					<%= f.input :user_id, :value => current_user.id, :as => :hidden %>		
+					<% if game.kickoff < Time.now %>															
+					<%= f.number_field :home_bet, disabled: true %> : 
+					<%= f.number_field :away_bet, disabled: true %> 						
+					<% else %>													
+					<%= f.number_field :home_bet, :class => 'submittable' %> : 
+					<%= f.number_field :away_bet, :class => 'submittable' %> 											
+					<% end %>																											
+				  <% end %>
+				</td>
+				<% end%>
+
+
+													
+				<td><%= truncate(Team.find(game.away_team_id).name, :length => 15) %></td>				
+			   </tr>	
+			<% end %>
+		</table>
+
+
+				
+
+	</div>
+
+
+
+
+</div>
