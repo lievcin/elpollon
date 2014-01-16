@@ -3,11 +3,10 @@
 		<div class="main_content">
 			<h2>Poll <%= @poll.name %></h2>
 		    <p><%= link_to "Invite your Facebook friends", "#", class: "btn btn-primary fb-invite" %> </p>
-			<p>Poll Administrator: <%= @admin.name %></p>
 			<ul>
 			  <% @members.each do |m| %>
-				<li><%= link_to m.name, user_path(m) %>
-				  <% if @user.id === @poll.admin_id %>
+				<li><%= m.name %>
+				  <% if m.id === @poll.admin_id %>
 					 Admin
 					 <% unless m.id === @user.id %>
 						| <%= link_to "Kick out",  kick_out_polls_path(:poll_id => @poll.id, :user_id =>m.id), :confirm => 'Are you sure?' %>
