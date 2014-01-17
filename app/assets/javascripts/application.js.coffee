@@ -12,8 +12,7 @@
 #
 #= require jquery
 #= require jquery_ujs
-#= require twitter/bootstrap
-#= require turbolinks
+#= require bootstrap.min
 #= require bets
 #= require_tree .
 
@@ -29,7 +28,6 @@ $ ->
     # FB.getLoginStatus()
 
   requestCallback = ->
-
 
   $(".fb-invite").on "click", ->
     event.preventDefault()

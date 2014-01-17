@@ -9,6 +9,15 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require bootstrap.min
  *= require_tree .
  */
 
+input#bet_home_bet {
+  width: 40px;
+  margin-bottom: 0px;
+}
+input#bet_away_bet {
+  width: 40px;
+  margin-bottom: 0px;
+}

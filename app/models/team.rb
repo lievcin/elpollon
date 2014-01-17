@@ -1,5 +1,5 @@
 class Team < ActiveRecord::Base
-  attr_accessible :name, :acronym, :country
+  attr_accessible :name, :acronym, :country, :logo
   
 	validates :name, 	:presence => true, :uniqueness => true
 	validates :acronym,	:presence => true

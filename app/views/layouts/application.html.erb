@@ -7,8 +7,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div id="fb-root"></div>
-<%= yield %>
+		
+	<nav class="navbar navbar-default" role="navigation">
+	  <div class="navbar-header">
+	    <a class="navbar-brand" href="#">El Pollon</a>
+	  </div>
+
+	    <ul class="nav navbar-nav navbar-right">
+	      <li class="dropdown">
+	        <a href="#" data-toggle="dropdown"><%=current_user.name%></a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	<div id="fb-root"></div>
+	<div class="row">
+	  <div class="span3">
+		<ul class="nav nav-list bs-docs-sidenav affix-top">
+		  <%= link_to "Create a new poll", new_poll_path, :class => "list-group-item"%>	
+		  <%= link_to "Join an existing poll", join_path, :class => "list-group-item"%>
+	      <br />
+		  <% current_user.polls.each do |poll| %>
+		   <%= link_to poll.name, poll_path(:id => poll.id), :class => "list-group-item"%>
+		  <% end %>				
+		</ul>
+	 </div>
+	 <div class="span9">
+	    <%= yield %>
+	 </div> 
 
 </body>
 </html>
+
+

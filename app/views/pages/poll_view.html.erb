@@ -1,23 +1,17 @@
 <div class="page-header">
-  <h1><%=@poll.name %></h1>
+  <h1><%= @poll.name %></h1>
+  
+  <% if current_user.id == @poll.admin_id %>  
+  <div>
+  <%= link_to 'Edit', edit_poll_path(@poll), :class => 'btn btn-info' %>	
+  <%= link_to 'Destroy', @poll, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+  <% end %>  
 </div>
-
-<% if current_user.id == @poll.admin_id %>  
-<div>
-	<dl class="dl-horizontal">
-	  <dt><strong>Password :</strong></dt>
-	  <dd><%= @poll.password %></dd>
-	  <dt><strong>Cup :</strong></dt>
-	  <dd><%= @poll.cup.name %></dd>
-	</dl>
-	
-<%= link_to 'Edit', edit_poll_path(@poll), :class => 'btn btn-info' %>	
-<%= link_to 'Destroy', @poll, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
-<% end %>  
 
 <div>
   <%= link_to "Invite your Facebook friends", "#", class: "btn btn-primary fb-invite" %>
 </div>	
+
 <div>	
   <%= link_to "Rankings", ranking_path(:id => @poll.id), class: "btn btn-success" %>
 </div>	
@@ -53,28 +47,35 @@
 				<%= game.away_score %> </td>
 				<% end %>
 				
-				<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
-
+				<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, params[:poll_id], game.id) %>
 				<% if @bet.empty? %>
-				<td>																				
+				<% @game = game %>				
+				<% @game = game %>								
+				<td>
+				
+					<% @new_bet.user_id = current_user.id %>								
+					<% @new_bet.poll_id = params[:poll_id] %>								
+					<% @new_bet.game_id = game.id %>
+												
 					<%= simple_form_for(@new_bet, :remote => true) do |f| %>
-				    <%= f.input :game_id, input_html: { value: game.id }, :as => :hidden %>
-				    <%= f.input :poll_id, input_html: { value: @poll.id }, :as => :hidden %>
-					<%= f.input :user_id, input_html: { value: current_user.id }, :as => :hidden %>	
+					<%= f.error_notification %>				  
+				    <%= f.input :game_id, :as => :hidden %>
+				    <%= f.input :poll_id, :as => :hidden %>
+					<%= f.input :user_id, :as => :hidden %>		
 					<% if game.kickoff < Time.now %>															
 					<%= f.number_field :home_bet, disabled: true %> : 
 					<%= f.number_field :away_bet, disabled: true %> 						
 					<% else %>													
 					<%= f.number_field :home_bet, :class => 'submittable' %> : 
-					<%= f.number_field :away_bet, :class => 'submittable' %>							
+					<%= f.number_field :away_bet, :class => 'submittable' %> 											
 					<% end %>																											
 				  <% end %> 	
 				</td>													
 				  <% else %>	
 				<td><%= simple_form_for(@bet[0], :remote => true) do |f| %>
-				    <%= f.input :game_id, input_html: { value: game.id }, :as => :hidden %>
-				    <%= f.input :poll_id, input_html: { value: @poll.id }, :as => :hidden %>
-					<%= f.input :user_id, input_html: { value: current_user.id }, :as => :hidden %>
+				    <%= f.input :game_id, :value => game.id, :as => :hidden %>
+				    <%= f.input :poll_id, :value => params[:poll_id], :as => :hidden %>
+					<%= f.input :user_id, :value => current_user.id, :as => :hidden %>		
 					<% if game.kickoff < Time.now %>															
 					<%= f.number_field :home_bet, disabled: true %> : 
 					<%= f.number_field :away_bet, disabled: true %> 						
@@ -85,6 +86,8 @@
 				  <% end %>
 				</td>
 				<% end%>
+
+
 													
 				<td><%= truncate(Team.find(game.away_team_id).name, :length => 15) %></td>				
 			   </tr>	

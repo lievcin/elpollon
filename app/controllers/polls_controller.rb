@@ -1,4 +1,7 @@
 class PollsController < ApplicationController
+
+	before_filter :ensure_user, only: [:home]
+  
 	def index
 		@title = "List of polls"
 		@polls = Poll.all
@@ -12,11 +15,9 @@ class PollsController < ApplicationController
 	end
 
 	def show
-		@title = "Poll view"
 		@poll = Poll.find(params[:id])
-		@admin = User.find(@poll.admin_id)
-		@user = current_user
-		@members = @poll.users
+		@games = current_user.polls.find(params[:id]).games
+		@new_bet = Bet.new
 	end
 
 	def edit
@@ -32,7 +33,6 @@ class PollsController < ApplicationController
 	def invite
     #something to be set up here... 
 	end 
-
 
 	def create
 		@poll = Poll.new(params[:poll])
@@ -68,7 +68,7 @@ class PollsController < ApplicationController
 		@poll = Poll.find(params[:id])
 		@poll.destroy		
 		flash[:success] = "Poll deleted"
-		redirect_to root_path
+		redirect_to main_path
 	end
 
 	def join
@@ -88,9 +88,6 @@ class PollsController < ApplicationController
 					if @password === @poll.password and @poll.users.include?(@user) == false
 						@user.polls << @poll
 						flash[:success] = "Joined the poll!"
-						#Post.create(	headline: "New member", 
-						#				category: "com" + @poll.id.to_s,
-						#				content: @user.name + " has joined! Welcome!")
 						redirect_to root_path
 					else
 						flash[:error] = "Name and password don't match"
@@ -106,13 +103,21 @@ class PollsController < ApplicationController
 	end
 
 	def kick_out
-  		@poll = Poll.find(params[:poll_id])
+  		@poll = Poll.find(params[:id])
   		@user = User.find(params[:user_id])
   		@poll.users.delete(@user)
 			flash[:success] = @user.name + " has been kicked out of the poll!"
-  			#Post.create(	headline: "Kicked out player", 
-  			#				category: "com" + @poll.id.to_s,
-  			#				content: @user.name + " was kicked out of the poll by the admin.")
   		redirect_to @poll
   end
+  
+  def ranking
+		@poll = Poll.find(params[:id])    
+  end
+  
+  def members
+		@poll = Poll.find(params[:id])    
+  end
+  
+  
+  
 end

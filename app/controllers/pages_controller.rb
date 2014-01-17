@@ -1,34 +1,26 @@
 # -*- coding: utf-8 -*-
 class PagesController < ApplicationController
 
-  layout 'main', :only => [:main]
+  layout 'landing', :only => [:home]
 
 	skip_filter :ensure_user, only: [:home]
 
 	def home
 		@title = "Homepage"
-		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(9)
-
+		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(10)
     @user = current_user
-		#if user_signed_in?
-		#	@user = current_user
-		#	if @user.polls.nil?
-		#		@posts = Post.where(:category => "News").paginate(:page => params[:page])
-		#	else
-		#		@poll = Poll.find(@user.polls)
-		#		selected_posts = Post.where(:category => ["News", "com" + @poll.id.to_s])
-		#		@posts = selected_posts.paginate(:page => params[:page])
-		#	end
-		#	@bets = @user.bets
-		#end
 	end
 
 	def main
-		@polls = current_user.polls
-		@games = current_user.games.where("kickoff > ?", Time.now).order(:kickoff).limit(9)
-		@new_bet = Bet.new		
-		#@exist_bet = Bet.find(params[:id])    		
+		#@games = current_user.games.where("kickoff > ?", Time.now).order(:kickoff).limit(50)
+		@games = current_user.games.order(:kickoff).limit(50).uniq
 	end
+	
+	def poll_view
+	  @poll  = Poll.find(params[:poll_id])
+		@games = current_user.polls.find(params[:poll_id]).games
+		@new_bet = Bet.new
+	end	
 	
 	def admin
 		@title = "Admin Overview"
