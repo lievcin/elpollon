@@ -1,26 +1,40 @@
-<div class="row">
-	<%# if user_signed_in? %>
-			<div class="span8" id="user_news">
-				<%= render 'shared/poll_menu' %>
-				<% if @user && @user.polls.nil? %>
-					<%= render 'news' %>
-				<% else %>
-					<%#= render 'poll_news' %>
-				<% end %>
-			</div>
-	<%# else %>
-		<div class="span8" id="welcome">
-			<div class="hero-unit">
-				<%= render 'welcome' %>
-			</div>
+<body>
+
+	<% flash.each do |name, msg| %>
+    <div class="alert alert-block alert-<%= name == :notice ? "success" : "error" %> fade in" style="margin-top:50px;">
+        <button class="close" data-dismiss="alert" type="button">×</button>
+        <p><%= msg  %></p>
+    </div>
+    <% end %>
+
+		<div class="jumbotron masthead">
+		  <div class="container">		
+		    <h1><%= t ".welcome"%></h1>
+	        <p><%= t ".catch_phrase"%></p>
+	  		<p><%= link_to "Sign in with Facebook!", "/auth/facebook", id: "sign_in", :class => "btn btn-primary btn-large" %></p>
+		  </div>
 		</div>
-	<%# end %>
+		
+	<div class="container main">
+	  <div class="marketing">
+	    <h1>Ipso lorem djkbjdbdj kjbjb .</h1>
+	    <p class="marketing-byline">Need reasons to sign up? See below.</p>
 
-	<div class="span4">
-		<%= render 'next_games' %>
+	    <div class="row-fluid">
+	      <div class="span4">
+	        <h2><%= t "home_local_title"%></h2>
+	        <p><%= t "home_local_body"%></p>
+	      </div>
+	      <div class="span4">
+	        <h2><%= t "home_universal_title"%></h2>
+	        <p><%= t "home_universal_body"%></p>
+	      </div>
+	      <div class="span4">
+	        <h2><%= t "home_up_title"%></h2>
+	        <p><%= t "home_up_body"%></p>
+	      </div>
+	    </div>
+
+	  </div>
 	</div>
-
-</div>
-
-
-
+	
