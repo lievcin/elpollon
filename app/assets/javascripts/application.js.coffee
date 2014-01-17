@@ -28,7 +28,6 @@ $ ->
     # FB.getLoginStatus()
 
   requestCallback = ->
-    debugger
 
   $(".fb-invite").on "click", ->
     event.preventDefault()
