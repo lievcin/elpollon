@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117124439) do
+ActiveRecord::Schema.define(version: 20140117212321) do
 
   create_table "bets", force: true do |t|
     t.integer  "user_id"
@@ -42,8 +42,6 @@ ActiveRecord::Schema.define(version: 20140117124439) do
     t.integer  "away_score"
     t.integer  "home_score_et"
     t.integer  "away_score_et"
-    t.boolean  "home_score_pt"
-    t.boolean  "away_score_pt"
     t.integer  "home_win"
     t.integer  "away_win"
     t.integer  "round_id"
@@ -51,6 +49,8 @@ ActiveRecord::Schema.define(version: 20140117124439) do
     t.integer  "away_team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "home_score_pt"
+    t.boolean  "away_score_pt"
   end
 
   create_table "polls", force: true do |t|
