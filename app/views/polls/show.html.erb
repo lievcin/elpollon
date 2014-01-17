@@ -53,35 +53,28 @@
 				<%= game.away_score %> </td>
 				<% end %>
 				
-				<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, params[:poll_id], game.id) %>
+				<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
+
 				<% if @bet.empty? %>
-				<% @game = game %>				
-				<% @game = game %>								
-				<td>
-				
-					<% @new_bet.user_id = current_user.id %>								
-					<% @new_bet.poll_id = params[:poll_id] %>								
-					<% @new_bet.game_id = game.id %>
-												
+				<td>																				
 					<%= simple_form_for(@new_bet, :remote => true) do |f| %>
-					<%= f.error_notification %>				  
-				    <%= f.input :game_id, :as => :hidden %>
-				    <%= f.input :poll_id, :as => :hidden %>
-					<%= f.input :user_id, :as => :hidden %>		
+				    <%= f.input :game_id, input_html: { value: game.id }, :as => :hidden %>
+				    <%= f.input :poll_id, input_html: { value: @poll.id }, :as => :hidden %>
+					<%= f.input :user_id, input_html: { value: current_user.id }, :as => :hidden %>	
 					<% if game.kickoff < Time.now %>															
 					<%= f.number_field :home_bet, disabled: true %> : 
 					<%= f.number_field :away_bet, disabled: true %> 						
 					<% else %>													
 					<%= f.number_field :home_bet, :class => 'submittable' %> : 
-					<%= f.number_field :away_bet, :class => 'submittable' %> 											
+					<%= f.number_field :away_bet, :class => 'submittable' %>							
 					<% end %>																											
 				  <% end %> 	
 				</td>													
 				  <% else %>	
 				<td><%= simple_form_for(@bet[0], :remote => true) do |f| %>
-				    <%= f.input :game_id, :value => game.id, :as => :hidden %>
-				    <%= f.input :poll_id, :value => params[:poll_id], :as => :hidden %>
-					<%= f.input :user_id, :value => current_user.id, :as => :hidden %>		
+				    <%= f.input :game_id, input_html: { value: game.id }, :as => :hidden %>
+				    <%= f.input :poll_id, input_html: { value: @poll.id }, :as => :hidden %>
+					<%= f.input :user_id, input_html: { value: current_user.id }, :as => :hidden %>
 					<% if game.kickoff < Time.now %>															
 					<%= f.number_field :home_bet, disabled: true %> : 
 					<%= f.number_field :away_bet, disabled: true %> 						
@@ -92,8 +85,6 @@
 				  <% end %>
 				</td>
 				<% end%>
-
-
 													
 				<td><%= truncate(Team.find(game.away_team_id).name, :length => 15) %></td>				
 			   </tr>	

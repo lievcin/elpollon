@@ -1,4 +1,7 @@
 class PollsController < ApplicationController
+
+	before_filter :ensure_user, only: [:home]
+  
 	def index
 		@title = "List of polls"
 		@polls = Poll.all
@@ -65,7 +68,7 @@ class PollsController < ApplicationController
 		@poll = Poll.find(params[:id])
 		@poll.destroy		
 		flash[:success] = "Poll deleted"
-		redirect_to root_path
+		redirect_to main_path
 	end
 
 	def join
@@ -85,9 +88,6 @@ class PollsController < ApplicationController
 					if @password === @poll.password and @poll.users.include?(@user) == false
 						@user.polls << @poll
 						flash[:success] = "Joined the poll!"
-						#Post.create(	headline: "New member", 
-						#				category: "com" + @poll.id.to_s,
-						#				content: @user.name + " has joined! Welcome!")
 						redirect_to root_path
 					else
 						flash[:error] = "Name and password don't match"
