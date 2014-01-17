@@ -5,7 +5,7 @@ Round.delete_all
 Team.delete_all
 User.delete_all
 
-cup1 = Cup.create(name: "Colombia - Apertura 2014", description:'El Torneo Apertura 2014 será la septuagésima novena (79a.) edición de la Categoría Primera A de fútbol profesional colombiano, siendo el primer torneo de la temporada 2014. Comenzará a disputarse el 25 de enero y finalizará el 21 de mayo de 2014.' )
+cup1 = Cup.create(name: "Colombia - Apertura 2014", start_date: "25-01-2014", end_date: "21-05-2014", description:'El Torneo Apertura 2014 será la septuagésima novena (79a.) edición de la Categoría Primera A de fútbol profesional colombiano, siendo el primer torneo de la temporada 2014. Comenzará a disputarse el 25 de enero y finalizará el 21 de mayo de 2014.' )
 
 round1 = Round.create(name: "1a Fecha - Todos contra todos", leg: 1, cup_id:cup1.id, round_type:"group")
 round2 = Round.create(name: "2a Fecha - Todos contra todos", leg: 2, cup_id:cup1.id, round_type:"group")
@@ -63,7 +63,7 @@ user4  = User.create(name: "Elena", country: "Israel")
 
 
 
-cup2 = Cup.create(name: "Barclays Premier League 2013/14", description:"The Premier League is an English professional league for men's association football clubs. At the top of the English football league system, it is the country's primary football competition. Contested by 20 clubs, it operates on a system of promotion and relegation with the Football League. Besides English clubs, some of the Welsh clubs can also qualify to play, and participation by some Scottish or Irish clubs has also been mooted." )
+cup2 = Cup.create(name: "Barclays Premier League 2013/14", , start_date: "17-08-2013", end_date: "11-05-2014", description:"The Premier League is an English professional league for men's association football clubs. At the top of the English football league system, it is the country's primary football competition. Contested by 20 clubs, it operates on a system of promotion and relegation with the Football League. Besides English clubs, some of the Welsh clubs can also qualify to play, and participation by some Scottish or Irish clubs has also been mooted." )
 
 round19 = Round.create(name: "Week 1", leg: 1, cup_id: cup2.id, round_type:"group")
 round20 = Round.create(name: "Week 2", leg: 2, cup_id: cup2.id, round_type:"group")

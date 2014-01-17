@@ -17,8 +17,9 @@ class PagesController < ApplicationController
 	end
 	
 	def poll_view
+	  @poll  = Poll.find(params[:poll_id])
 		@games = current_user.polls.find(params[:poll_id]).games
-		@new_bet = Bet.new		
+		@new_bet = Bet.new
 	end	
 	
 	def admin

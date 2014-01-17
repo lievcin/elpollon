@@ -1,5 +1,5 @@
 class Cup < ActiveRecord::Base
-  attr_accessible :name, :description
+  attr_accessible :name, :description, :start_date, :end_date, :logo
 
 	has_many :rounds
 	has_many :polls	

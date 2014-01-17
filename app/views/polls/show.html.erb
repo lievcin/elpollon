@@ -1,25 +1,16 @@
-<div class="row">
-	<div class="span8">
-		<div class="main_content">
-			<h2>Poll <%= @poll.name %></h2>
-		    <p><%= link_to "Invite your Facebook friends", "#", class: "btn btn-primary fb-invite" %> </p>
-			<ul>
-			  <% @members.each do |m| %>
-				<li><%= m.name %>
-				  <% if m.id === @poll.admin_id %>
-					 Admin
-					 <% unless m.id === @user.id %>
-						| <%= link_to "Kick out",  kick_out_polls_path(:poll_id => @poll.id, :user_id =>m.id), :confirm => 'Are you sure?' %>
-					 <% end %>
-					 <% end %>
-				</li>
-			   <% end %>
-			</ul>
-				<% if  @user.id === @poll.admin_id %>
-					<p><%= link_to "Change name or password for poll", edit_poll_path, :class => "btn" %></p>
-					<p><%= link_to 'Delete poll', @poll, :confirm => 'Are you sure? All other users in the poll will be removed from it as well.', :class => "btn", :method => :delete %></p>
-				<% end %>
-			
-		</div>
-	</div>
+<%- model_class = Poll -%>
+<div class="page-header">
+  <h1><%=@poll.name %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Password :</strong></dt>
+  <dd><%= @poll.password %></dd>
+  <dt><strong>Cup :</strong></dt>
+  <dd><%= @poll.cup.name %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to 'Edit', edit_poll_path(@poll), :class => 'btn btn-info' %>	
+  <%= link_to 'Destroy', @poll, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
 </div>

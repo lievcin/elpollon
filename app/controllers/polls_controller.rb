@@ -33,7 +33,6 @@ class PollsController < ApplicationController
     #something to be set up here... 
 	end 
 
-
 	def create
 		@poll = Poll.new(params[:poll])
 		@user = current_user
@@ -115,4 +114,15 @@ class PollsController < ApplicationController
   			#				content: @user.name + " was kicked out of the poll by the admin.")
   		redirect_to @poll
   end
+  
+  def poll_ranking
+		@poll = Poll.find(params[:poll_id])    
+  end
+  
+  def poll_members
+		@poll = Poll.find(params[:poll_id])    
+  end
+  
+  
+  
 end

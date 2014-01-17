@@ -7,32 +7,34 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+		
+	<nav class="navbar navbar-default" role="navigation">
+	  <div class="navbar-header">
+	    <a class="navbar-brand" href="#">El Pollon</a>
+	  </div>
 
-    <div class="navbar navbar-static-top navbar-inverse">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="brand" href="/main">El pollon</a>
-        </div>
-      </div>
-    </div>
-
-   <div class="container-fluid">
-      <div class="sidebar span2">
-        <div class="well">
-
-          <h5>Polls</h5>
-		  <li><%= link_to "Create a new poll", new_poll_path%></li>
-		  <li><%= link_to "Join an existing poll", join_path%></li>
-
+	    <ul class="nav navbar-nav navbar-right">
+	      <li class="dropdown">
+	        <a href="#" data-toggle="dropdown"><%=current_user.name%></a>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	<div id="fb-root"></div>
+	<div class="row">
+	  <div class="span3">
+		<ul class="nav nav-list bs-docs-sidenav affix-top">
+		  <%= link_to "Create a new poll", new_poll_path, :class => "list-group-item"%>	
+		  <%= link_to "Join an existing poll", join_path, :class => "list-group-item"%>
+	      <br />
 		  <% current_user.polls.each do |poll| %>
-		    <li><%= link_to poll.name,  poll_view_path(:poll_id => poll.id) %>
-		  <% end %>		
-		    
-        </div>
-      </div>
-   </div>
-	
-<%= yield %>
+		   <%= link_to poll.name,  poll_view_path(:poll_id => poll.id), :class => "list-group-item"%>
+		  <% end %>				
+		</ul>
+	 </div>
+	 <div class="span9">
+	    <%= yield %>
+	 </div> 
 
 </body>
 </html>
