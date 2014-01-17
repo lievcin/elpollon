@@ -13,10 +13,10 @@
 </div>	
 
 <div>	
-  <%= link_to "Rankings", poll_ranking_path(:poll_id => @poll.id), class: "btn btn-success" %>
+  <%= link_to "Rankings", ranking_path(:id => @poll.id), class: "btn btn-success" %>
 </div>	
 <div>	
-  <%= link_to "Members", poll_members_path(:poll_id => @poll.id), class: "btn btn-warning" %>
+  <%= link_to "Members", members_path(:id => @poll.id), class: "btn btn-warning" %>
 </div>	
 
 

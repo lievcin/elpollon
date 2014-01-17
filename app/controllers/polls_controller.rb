@@ -12,11 +12,9 @@ class PollsController < ApplicationController
 	end
 
 	def show
-		@title = "Poll view"
 		@poll = Poll.find(params[:id])
-		@admin = User.find(@poll.admin_id)
-		@user = current_user
-		@members = @poll.users
+		@games = current_user.polls.find(params[:id]).games
+		@new_bet = Bet.new
 	end
 
 	def edit
@@ -105,22 +103,19 @@ class PollsController < ApplicationController
 	end
 
 	def kick_out
-  		@poll = Poll.find(params[:poll_id])
+  		@poll = Poll.find(params[:id])
   		@user = User.find(params[:user_id])
   		@poll.users.delete(@user)
 			flash[:success] = @user.name + " has been kicked out of the poll!"
-  			#Post.create(	headline: "Kicked out player", 
-  			#				category: "com" + @poll.id.to_s,
-  			#				content: @user.name + " was kicked out of the poll by the admin.")
   		redirect_to @poll
   end
   
-  def poll_ranking
-		@poll = Poll.find(params[:poll_id])    
+  def ranking
+		@poll = Poll.find(params[:id])    
   end
   
-  def poll_members
-		@poll = Poll.find(params[:poll_id])    
+  def members
+		@poll = Poll.find(params[:id])    
   end
   
   

@@ -28,7 +28,7 @@
 		  <%= link_to "Join an existing poll", join_path, :class => "list-group-item"%>
 	      <br />
 		  <% current_user.polls.each do |poll| %>
-		   <%= link_to poll.name,  poll_view_path(:poll_id => poll.id), :class => "list-group-item"%>
+		   <%= link_to poll.name, poll_path(:id => poll.id), :class => "list-group-item"%>
 		  <% end %>				
 		</ul>
 	 </div>
