@@ -32,15 +32,18 @@
 		<table class="table">
 			<tr>
 			  <th>Fecha</th>				
-			  <th>Local</th>
+			  <th></th>
+			  <th></th>			
 			  <th>Resultado</th> 
 			  <th>Apuesta</th> 			
-			  <th>Visitante</th>
+			  <th></th>
+			  <th></th>			
 			</tr>
 			<% @games.each do |game| %>
 			  <tr>
 				<td><%= game.kickoff.to_formatted_s(:short) %></td>				
-				<td><%= truncate(Team.find(game.home_team_id).name, :length => 15) %></td>
+				<td><%= truncate(Team.find(game.home_team_id).name, :length => 15) %></td> 
+				<td><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>													
 				<% if game.home_score.nil? %>
 				<td> - :
 				<% else %>
@@ -85,7 +88,7 @@
 				  <% end %>
 				</td>
 				<% end%>
-													
+				<td><%= image_tag(Team.find(game.away_team_id).logo, :id => 'team_logo') %></td>													
 				<td><%= truncate(Team.find(game.away_team_id).name, :length => 15) %></td>				
 			   </tr>	
 			<% end %>

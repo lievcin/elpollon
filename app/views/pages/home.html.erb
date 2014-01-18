@@ -1,38 +1,31 @@
 <body>
 
-	<% flash.each do |name, msg| %>
-    <div class="alert alert-block alert-<%= name == :notice ? "success" : "error" %> fade in" style="margin-top:50px;">
-        <button class="close" data-dismiss="alert" type="button">×</button>
-        <p><%= msg  %></p>
-    </div>
-    <% end %>
-
 		<div class="jumbotron masthead">
 		  <div class="container">		
-		    <h1><%= t ".welcome"%></h1>
-	        <p><%= t ".catch_phrase"%></p>
+		    <h1>El Pollón</h1>
+	        <p>La polla de fútbol con tus amigos, sin importar donde estén.</p>
 	  		<p><%= link_to "Entrar con Facebook", "/auth/facebook", id: "sign_in", :class => "btn btn-primary btn-large" %></p>
 		  </div>
 		</div>
 		
 	<div class="container main">
 	  <div class="marketing">
-	    <h1>Ipso lorem djkbjdbdj kjbjb .</h1>
-	    <p class="marketing-byline">Need reasons to sign up? See below.</p>
+
+	    <p class="marketing-byline"></p>
 
 	    <div class="row-fluid">
-	      <div class="span4">
-	        <h2><%= t "home_local_title"%></h2>
-	        <p><%= t "home_local_body"%></p>
+	      <div class="span3">
+	        <h2>1. Inscríbete con tu perfil de Facebook</h2>
 	      </div>
-	      <div class="span4">
-	        <h2><%= t "home_universal_title"%></h2>
-	        <p><%= t "home_universal_body"%></p>
+	      <div class="span3">
+	        <h2>2. Crea una polla seleccionando un torneo</h2>
 	      </div>
-	      <div class="span4">
-	        <h2><%= t "home_up_title"%></h2>
-	        <p><%= t "home_up_body"%></p>
+	      <div class="span3">
+	        <h2>3. Invita a tus amigos a jugar</h2>
 	      </div>
+	      <div class="span3">
+	        <h2>4. Apuesta a los marcadores y gana puntos!</h2>
+	      </div>	
 	    </div>
 
 	  </div>
