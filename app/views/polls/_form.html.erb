@@ -3,10 +3,9 @@
   <%= f.error_notification %>
   <%= f.input :name, label: 'Nombre de la polla' %>
   <%= f.input :password, label: 'Clave', :hint => '6 a 20 letras.' %>
-  <%= f.input :admin_id, as: :hidden %>
   <%= f.association :cup, label: 'Elige la competencia' %>
   <div class="form-actions">
-    <%= f.button :submit, 'Crear polla', :class => 'btn-primary'%>	
+    <%= f.button :submit, 'Crear polla', :class => 'btn-primary'%>
     <%= link_to 'Cancelar', main_path, :class => 'btn btn-danger' %>
   </div>
 

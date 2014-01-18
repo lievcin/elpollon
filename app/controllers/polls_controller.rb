@@ -1,7 +1,7 @@
 class PollsController < ApplicationController
 
 	before_filter :ensure_user, only: [:home]
-  
+
 	def index
 		@polls = Poll.all
 	end
@@ -28,15 +28,15 @@ class PollsController < ApplicationController
 	end
 
 	def create
-		@poll = Poll.new(params[:poll])
-		@user = current_user
+		@poll = Poll.new(poll_attributes)
+
 		if @poll.save
-		  @user.polls << @poll
+		  current_user.polls << @poll
 			flash[:success] = "Polla creada."
 			redirect_to @poll
 		else
 			flash[:error] = "Ha ocurrido un error!"
-			redirect_to :back
+			render "new"
 		end
 	end
 
@@ -59,7 +59,7 @@ class PollsController < ApplicationController
 
 	def destroy
 		@poll = Poll.find(params[:id])
-		@poll.destroy		
+		@poll.destroy
 		flash[:success] = "Poll destruida"
 		redirect_to main_path
 	end
@@ -92,7 +92,7 @@ class PollsController < ApplicationController
 	end
 
 	def leave
-    #something to be set up here... 
+    #something to be set up here...
 	end
 
 	def kick_out
@@ -102,15 +102,19 @@ class PollsController < ApplicationController
 			flash[:success] = @user.name + " ha sido sacado de la polla"
   		redirect_to @poll
   end
-  
+
   def ranking
-		@poll = Poll.find(params[:id])    
+		@poll = Poll.find(params[:id])
   end
-  
+
   def members
-		@poll = Poll.find(params[:id])    
+		@poll = Poll.find(params[:id])
   end
-  
-  
-  
+
+private
+
+  def poll_attributes
+  	params[:poll].merge(admin_id: current_user.id)
+  end
+
 end
