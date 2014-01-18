@@ -31,10 +31,10 @@ input#bet_away_bet {
 
 .navbar .brand {
 	color: #fff;
-  
+
 }
 
-#navbar {		
+#navbar {
   background: #020031; /* Old browsers */
   background: -moz-linear-gradient(45deg,  #3abf1a 0%, #118d56 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#3abf1a), color-stop(100%,#118d56)); /* Chrome,Safari4+ */
@@ -156,6 +156,7 @@ input#bet_away_bet {
   font-size: 16px;
   line-height: 1.5;
 }
+
 .marketing .marketing-byline {
   margin-bottom: 40px;
   font-size: 20px;
@@ -167,23 +168,23 @@ input#bet_away_bet {
   display: block;
   margin: 0 auto 30px;
 }
-p {	
+p {
 	font: 13px/1.7em 'Open Sans', arial, sans-serif;
 }
 h1 {
 	margin-bottom: .25em;
 }
 h2 {
-	margin-bottom: .5em;	
+	margin-bottom: .5em;
 	color: #4A515B;
 }
 h3 {
-	margin-bottom: .75em;	
+	margin-bottom: .75em;
 	font-weight: 600;
 	color: #F90;
 }
 h4, h5, h6 {
-	margin-bottom: 1.25em;	
+	margin-bottom: 1.25em;
 	color: #666;
 }
 hr {
@@ -192,4 +193,5 @@ hr {
 input {
 	font: 13px/1.7em 'Open Sans', arial, sans-serif;
 }
+
 /*------------------------------------------------------------------
