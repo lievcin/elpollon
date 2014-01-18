@@ -3,12 +3,10 @@ class PollsController < ApplicationController
 	before_filter :ensure_user, only: [:home]
   
 	def index
-		@title = "List of polls"
 		@polls = Poll.all
 	end
 
 	def new
-		@title = "New poll"
 		@user = current_user
 		@poll = Poll.new
 		@poll.admin_id = @user.id
@@ -21,7 +19,6 @@ class PollsController < ApplicationController
 	end
 
 	def edit
-		@title = "Poll edit"
 		@user = current_user
 		@poll = Poll.find(params[:id])
 		if @poll.admin_id != @user.id
@@ -30,19 +27,15 @@ class PollsController < ApplicationController
 		end
 	end
 
-	def invite
-    #something to be set up here... 
-	end 
-
 	def create
 		@poll = Poll.new(params[:poll])
 		@user = current_user
 		if @poll.save
 		  @user.polls << @poll
-			flash[:success] = "Poll created successfully"
+			flash[:success] = "Polla creada."
 			redirect_to @poll
 		else
-			flash[:error] = "Error!"
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to :back
 		end
 	end
@@ -56,10 +49,10 @@ class PollsController < ApplicationController
 			@password_change = true
 		end
 		if @poll.update_attributes(params[:poll])
-			flash[:success] = "Poll updated."
+			flash[:success] = "Polla actualizada."
 			redirect_to @poll
 		else
-			flash[:error] = "Error!"
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to :back
 		end
 	end
@@ -67,7 +60,7 @@ class PollsController < ApplicationController
 	def destroy
 		@poll = Poll.find(params[:id])
 		@poll.destroy		
-		flash[:success] = "Poll deleted"
+		flash[:success] = "Poll destruida"
 		redirect_to main_path
 	end
 
@@ -81,16 +74,16 @@ class PollsController < ApplicationController
 		@password = params[:poll_pass]
 		unless params[:poll_search].nil?
 			if @poll.nil?
-				flash[:error] = "Poll not found."
+				flash[:error] = "La polla no ha sido encontrada."
 				redirect_to :back
 			else
 				unless @password.nil?
 					if @password === @poll.password and @poll.users.include?(@user) == false
 						@user.polls << @poll
-						flash[:success] = "Joined the poll!"
+						flash[:success] = "Ya eres parte de la polla!"
 						redirect_to root_path
 					else
-						flash[:error] = "Name and password don't match"
+						flash[:error] = "El nombre y la clave de la polla no coinciden"
 						redirect_to :back
 					end
 				end
@@ -106,7 +99,7 @@ class PollsController < ApplicationController
   		@poll = Poll.find(params[:id])
   		@user = User.find(params[:user_id])
   		@poll.users.delete(@user)
-			flash[:success] = @user.name + " has been kicked out of the poll!"
+			flash[:success] = @user.name + " ha sido sacado de la polla"
   		redirect_to @poll
   end
   

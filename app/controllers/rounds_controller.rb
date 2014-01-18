@@ -31,7 +31,7 @@ class RoundsController < ApplicationController
 			flash[:success] = "Round Created Successfully"
 			redirect_to cup_rounds_url(@cup)
 		else
-			flash[:error] = "Error!"
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to :back
 		end
 	end
@@ -44,7 +44,7 @@ class RoundsController < ApplicationController
 			flash[:success] = "Successfully updated Round."
 			redirect_to cup_rounds_url(@cup)
 		else
-			flash[:error] = "Error!"
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to :back
 		end
 	end

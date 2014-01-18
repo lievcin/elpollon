@@ -5,37 +5,37 @@
 <% if current_user.id == @poll.admin_id %>  
 <div>
 	<dl class="dl-horizontal">
-	  <dt><strong>Password :</strong></dt>
+	  <dt><strong>Clave :</strong></dt>
 	  <dd><%= @poll.password %></dd>
-	  <dt><strong>Cup :</strong></dt>
+	  <dt><strong>Competencia :</strong></dt>
 	  <dd><%= @poll.cup.name %></dd>
 	</dl>
 	
-<%= link_to 'Edit', edit_poll_path(@poll), :class => 'btn btn-info' %>	
-<%= link_to 'Destroy', @poll, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+<%= link_to 'Editar', edit_poll_path(@poll), :class => 'btn btn-info' %>	
+<%= link_to 'Destruir', @poll, method: :delete, data: { confirm: 'Esta seguro?' }, :class => 'btn btn-danger' %>
 <% end %>  
 
 <div>
-  <%= link_to "Invite your Facebook friends", "#", class: "btn btn-primary fb-invite" %>
+  <%= link_to "Invita a tus amigos en Facebook", "#", class: "btn btn-primary fb-invite" %>
 </div>	
 <div>	
-  <%= link_to "Rankings", ranking_path(:id => @poll.id), class: "btn btn-success" %>
+  <%= link_to "Clasificación", ranking_path(:id => @poll.id), class: "btn btn-success" %>
 </div>	
 <div>	
-  <%= link_to "Members", members_path(:id => @poll.id), class: "btn btn-warning" %>
+  <%= link_to "Miembros", members_path(:id => @poll.id), class: "btn btn-warning" %>
 </div>	
 
 
 	<div>
-		<h3>Games</h3>
+		<h3>Partidos</h3>
 		
 		<table class="table">
 			<tr>
-			  <th>Kick-off</th>				
-			  <th>Home</th>
-			  <th>Result</th> 
-			  <th>Bet</th> 			
-			  <th>Away</th>
+			  <th>Fecha</th>				
+			  <th>Local</th>
+			  <th>Resultado</th> 
+			  <th>Apuesta</th> 			
+			  <th>Visitante</th>
 			</tr>
 			<% @games.each do |game| %>
 			  <tr>

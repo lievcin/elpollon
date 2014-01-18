@@ -47,7 +47,7 @@ class GamesController < ApplicationController
 			flash[:success] = "Game Successfully created"
 			redirect_to @game
 		else
-			flash[:error] = "Error!"
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to :back
 		end
 	end
@@ -59,7 +59,7 @@ class GamesController < ApplicationController
 			flash[:success] = "Game updated"
 			redirect_to @game
 		else
-			flash[:error] = "Error!"
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to :back
 		end
 	end
@@ -74,32 +74,6 @@ class GamesController < ApplicationController
 		@title = "Results"
 		#@games = Game.where("kickoff < ?", Time.now).where(home_score: nil).order(:kickoff).limit(36)
 		@games = Game.where("kickoff < ?", Time.now).order(:kickoff).limit(36)		
-	end
-
-	def fix_result
-		@title = "Enter results"
-		@game = Game.find(params[:id])
-	end
-
-	def save_result
-		@game = Game.find(params[:id])
-		@bets = Bet.find_all_by_game_id(@game.id)
-
-		if @game.update_attributes(params[:game])
-			flash[:success] = "Results submitted."
-			# do some point-updating here
-			@bets.each do |bet|
-				p = points_per_game(@game.home_score, @game.away_score, bet.home_bet, bet.away_bet)
-				bet.points = p
-				bet.save
-				flash[:success] = "Points assigned"
-			end
-
-			redirect_to result_index_games_path
-		else
-			flash[:error] = "Error!"
-			redirect_to :back
-		end
 	end
 
 end
