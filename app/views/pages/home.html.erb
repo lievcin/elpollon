@@ -27,6 +27,28 @@
 	        <h2>4. Apuesta a los marcadores y gana puntos!</h2>
 	      </div>	
 	    </div>
+		<br />
+		<br />		
+	    <div class="row-fluid">
+			<% Cup.all.each do |cup| %>
+			  <div class="span2">	      
+			    <h2><%= image_tag(cup.logo, :id => 'cup_logo_main', :class=>"img-rounded") %></h2>
+			  </div>	      
+			<% end %>
+			  <div class="span2">	      
+			    <h2><%= image_tag("copa_lib_black.png", :id => 'cup_logo_main', :class=>"img-rounded") %></h2>
+			  </div>
+			  <div class="span2">	      
+			    <h2><%= image_tag("la_liga_black.png", :id => 'cup_logo_main', :class=>"img-rounded") %></h2>
+			  </div>
+			  <div class="span2">	      
+			    <h2><%= image_tag("cl_black.png", :id => 'cup_logo_main', :class=>"img-rounded") %></h2>
+			  </div>
+			  <div class="span2">	      
+			    <h2><%= image_tag("wc_brasil_black.jpg", :id => 'cup_logo_main', :class=>"img-rounded") %></h2>
+			  </div>
+			
+	    </div>
 
 	  </div>
 	</div>

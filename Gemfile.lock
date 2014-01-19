@@ -91,6 +91,9 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    password_reveal_input-simple_form (1.0.0)
+      jquery-rails
+      simple_form
     pg (0.17.1)
     polyglot (0.3.3)
     protected_attributes (1.0.5)
@@ -180,6 +183,7 @@ DEPENDENCIES
   json
   mysql2
   omniauth-facebook
+  password_reveal_input-simple_form
   pg
   protected_attributes
   pry-rails

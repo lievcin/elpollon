@@ -14,6 +14,7 @@ gem 'will_paginate'
 gem 'quiet_assets'
 gem 'thin'
 gem 'simple_form'
+gem 'password_reveal_input-simple_form'
 gem 'country_select'
 gem 'protected_attributes'
 

@@ -53,7 +53,7 @@ class PollsController < ApplicationController
 			redirect_to @poll
 		else
 			flash[:error] = "Ha ocurrido un error!"
-			redirect_to :back
+			render "edit"
 		end
 	end
 
@@ -84,7 +84,7 @@ class PollsController < ApplicationController
 						redirect_to root_path
 					else
 						flash[:error] = "El nombre y la clave de la polla no coinciden"
-						redirect_to :back
+      			render "join"
 					end
 				end
 			end
