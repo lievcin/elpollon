@@ -100,7 +100,7 @@ class PollsController < ApplicationController
   		@user = User.find(params[:user_id])
   		@poll.users.delete(@user)
 			flash[:success] = @user.name + " ha sido sacado de la polla"
-  		redirect_to @poll
+      render "ranking"
   end
 
   def ranking

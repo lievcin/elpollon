@@ -1,5 +1,5 @@
 <div class="ss-header">
-	<h3><%=@poll.name %>
+	<h3><%= link_to @poll.name, poll_path(:id => @poll.id)%>		
 		<small class= "poll-actions pull-right">
 		  <div class="btn-group">
 			
@@ -15,18 +15,9 @@
 		  	    </ul>
 		  </div>
 		
-		  <div class="btn-group">
-			
+		  <div class="btn-group">			
 			<%= link_to "Clasificación", ranking_path(:id => @poll.id), class: "btn btn-mini btn-warning" %>
-     		<%= link_to "Miembros", members_path(:id => @poll.id), class: "btn btn-mini btn-primary" %>			
-
-		  	<button class="btn btn-mini btn-primary dropdown-toggle" data-toggle="dropdown">
-		      <span class="caret"></span>
-		  	</button>
-			<ul class="dropdown-menu">
-  			  <li><%= link_to "Invíta amigos en Facebook", "#", :class => "fb-invite" %></li>
-	  	    </ul>
-
+     		<%= link_to "Invitar amigos en Facebook", "#", class: "btn btn-mini btn-primary fb-invite" %>			
 		  </div>		
 	    </small>
 	</h3>
@@ -56,9 +47,10 @@
 			  <th></th>
 			  <th></th>
 			  <th>Resultado</th>
+			  <th></th>
+			  <th></th>
 			  <th>Apuesta</th>
-			  <th></th>
-			  <th></th>
+			  <th>Puntos</th>						
 			</tr>
 			<% @games.each do |game| %>
 			  <tr>
@@ -76,7 +68,8 @@
 				<% else %>
 				<%= game.away_score %> </td>
 				<% end %>
-
+				<td><%= image_tag(Team.find(game.away_team_id).logo, :id => 'team_logo') %></td>
+				<td><%= truncate(Team.find(game.away_team_id).name, :length => 15) %></td>
 				<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
 
 				<% if @bet.empty? %>
@@ -109,8 +102,11 @@
 				  <% end %>
 				</td>
 				<% end%>
-				<td><%= image_tag(Team.find(game.away_team_id).logo, :id => 'team_logo') %></td>
-				<td><%= truncate(Team.find(game.away_team_id).name, :length => 15) %></td>
+				<% if @bet.empty? %>
+				  <td>0</td>	
+				<% else %>														
+				  <td><%= @bet[0].total_points %></td>							
+				<% end %>								
 			   </tr>
 			<% end %>
 		</table>
