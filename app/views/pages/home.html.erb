@@ -2,7 +2,7 @@
 
 		<div class="jumbotron masthead">
 		  <div class="container">		
-		    <h1>El Pollón</h1>
+		    <h1><%= image_tag("pollon.svg", :id => 'brand_logo', :class=>"img-rounded") %> El Pollón</h1>
 	        <p>La polla de fútbol con tus amigos, sin importar donde estén.</p>
 	  		<p><%= link_to "Entrar con Facebook", "/auth/facebook", id: "sign_in", :class => "btn btn-primary btn-large" %></p>
 		  </div>
@@ -15,16 +15,16 @@
 
 	    <div class="row-fluid">
 	      <div class="span3">
-	        <h2>1. Inscríbete con tu perfil de Facebook</h2>
+	        <h3>1. Inscríbete con tu perfil de Facebook</h3>
 	      </div>
 	      <div class="span3">
-	        <h2>2. Crea una polla seleccionando un torneo</h2>
+	        <h3>2. Crea una polla seleccionando un torneo</h3>
 	      </div>
 	      <div class="span3">
-	        <h2>3. Invita a tus amigos a jugar</h2>
+	        <h3>3. Invita a tus amigos a jugar</h3>
 	      </div>
 	      <div class="span3">
-	        <h2>4. Apuesta a los marcadores y gana puntos!</h2>
+	        <h3>4. Apuesta a los marcadores y gana puntos!</h3>
 	      </div>	
 	    </div>
 		<br />
