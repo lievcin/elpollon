@@ -7,12 +7,11 @@ class PagesController < ApplicationController
 
 	def home
 		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(10)
-    @user = current_user
 	end
 
 	def main
 		#@games = current_user.games.where("kickoff > ?", Time.now).order(:kickoff).limit(50)
-		@games = current_user.games.order(:kickoff).limit(50).uniq
+		@games = current_user.games.order(:kickoff).uniq
 	end
 	
 	def poll_view

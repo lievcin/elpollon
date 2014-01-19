@@ -25,7 +25,7 @@
 </div>
 
 <div class="progress progress-striped active">
-  <div class="bar" style="width:<%= 100*(1 - @poll.cup.games.where("kickoff > ?", Time.now).count/@poll.cup.games.count)%>%;"></div>
+  <div class="bar" style="width:<%= 100*(1 - @poll.cup.games.where("kickoff > ?", Time.now).count.to_f/@poll.cup.games.count).round(2)%>%;"></div>
 </div>
 
 	<div>
