@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>El Pollon</title>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
@@ -17,7 +18,7 @@
                 <li><%= link_to "Crear una polla", new_poll_path %></li>
                 <li><%= link_to "Unirme a una polla", join_path %></li>
                 <br />
-				<li class="divider"></li>				
+				<li class="divider"></li>
 				<% current_user.polls.each do |poll| %>
 				  <li><%= link_to poll.name, poll_path(:id => poll.id), :class => "list-group-item"%></li>
 				<% end %>
@@ -31,8 +32,8 @@
 			  <div class="alert alert-<%= key %>"><%= value %>
 			    <button type="button" class="close" data-dismiss="alert">&times;</button>
 			  </div>
-			<% end %>			
-			<%= yield %>				 
+			<% end %>
+			<%= yield %>
           </div>
         </div>
 
