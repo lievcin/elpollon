@@ -30,20 +30,20 @@
 	    <div class="row-fluid">
 			<% Cup.all.each do |cup| %>
 			  <div class="span2">	      
-			    <h2><%= image_tag(cup.logo, :id => 'cup_logo_main', :class=>"img-rounded") %></h2>
+			    <h2><%= image_tag(cup.logo, id: 'cup_logo_main', class: "img-rounded", title: cup.name + " - Activa") %></h2>
 			  </div>	      
 			<% end %>
 			  <div class="span2">	      
-			    <h2><%= image_tag("copa_lib_black.png", :id => 'cup_logo_main', :class=>"img-rounded") %></h2>
+			    <h2><%= image_tag("copa_lib_black.png", id: 'cup_logo_main', class: "img-rounded", title: "Copa Libertadores 2014 - Próximamente") %></h2>
 			  </div>
 			  <div class="span2">	      
-			    <h2><%= image_tag("la_liga_black.png", :id => 'cup_logo_main', :class=>"img-rounded") %></h2>
+			    <h2><%= image_tag("la_liga_black.png", id: 'cup_logo_main', class: "img-rounded", title: "La Liga 2013/14 - Próximamente") %></h2>
 			  </div>
 			  <div class="span2">	      
-			    <h2><%= image_tag("cl_black.png", :id => 'cup_logo_main', :class=>"img-rounded") %></h2>
+			    <h2><%= image_tag("cl_black.png", id: 'cup_logo_main', class: "img-rounded", title: "UEFA Champions League 2013/14 - Próximamente") %></h2>
 			  </div>
 			  <div class="span2">	      
-			    <h2><%= image_tag("wc_brasil_black.jpg", :id => 'cup_logo_main', :class=>"img-rounded") %></h2>
+			    <h2><%= image_tag("wc_brasil_black.jpg", id: 'cup_logo_main', class: "img-rounded", title: "Mundial Brasil 2014 - Próximamente") %></h2>
 			  </div>
 			
 	    </div>

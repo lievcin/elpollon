@@ -6,5 +6,3 @@
 	});
   });
 }).call(this);
-
-$('.table-fixed-header').fixedHeader()
