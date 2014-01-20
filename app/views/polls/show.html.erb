@@ -1,5 +1,7 @@
 <div class="ss-header">
-	<h3><%= link_to @poll.name, poll_path(:id => @poll.id)%>
+	<h3>
+	  	<a id="menu-toggle" href="#" class="btn btn-mini"><i class="icon-align-justify"></i></a>
+	    <%= link_to @poll.name, poll_path(:id => @poll.id)%>
 		<small class= "poll-actions pull-right">
 		  <div class="btn-group">
 
@@ -41,16 +43,15 @@
 	<div>
 
 		<table class="table table_games">
-			<tr>
+			<thead>
 			  <th>Fecha</th>
-			  <th></th>
-			  <th></th>
+			  <th colspan=2>Local</th>
 			  <th>Resultado</th>
-			  <th></th>
-			  <th></th>
+			  <th colspan=2>Visitante</th>
 			  <th>Apuesta</th>
 			  <th>Puntos</th>
-			</tr>
+			</thead>
+			<tbody>			
 			<% @games.each do |game| %>
 			  <tr>
 				<td><%= game.kickoff.localtime.to_formatted_s(:short) %></td>
@@ -108,5 +109,6 @@
 				<% end %>
 			   </tr>
 			<% end %>
+			</tbody>						
 		</table>
 	</div>
