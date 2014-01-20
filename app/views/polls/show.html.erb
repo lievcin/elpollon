@@ -41,9 +41,10 @@
   </div>
 </div>
 
+	<br />
 	<div>
 
-		<table class="table">
+		<table class="table table_games">
 			<tr>
 			  <th>Fecha</th>
 			  <th></th>
@@ -56,7 +57,7 @@
 			</tr>
 			<% @games.each do |game| %>
 			  <tr>
-				<td><%= game.kickoff.to_formatted_s(:short) %></td>
+				<td><%= game.kickoff.in_time_zone(Time.zone).to_formatted_s(:short) %></td>
 				<td><%= truncate(Team.find(game.home_team_id).name, :length => 15) %></td>
 				<td><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>
 				<% if game.home_score.nil? %>

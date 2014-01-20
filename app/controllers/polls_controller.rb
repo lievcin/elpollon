@@ -3,7 +3,7 @@ class PollsController < ApplicationController
 	before_filter :ensure_user, only: [:home]
 
 	def index
-		@polls = Poll.all
+		@polls = current_user.polls
 	end
 
 	def new
@@ -23,7 +23,7 @@ class PollsController < ApplicationController
 		@poll = Poll.find(params[:id])
 		if @poll.admin_id != @user.id
 			flash[:error] = "The poll can only be edited by the administrator!"
-			redirect_to root_path
+			redirect_to main_path
 		end
 	end
 

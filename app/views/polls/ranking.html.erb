@@ -23,7 +23,7 @@
 	</h3>
 </div>
 
-<div class="progress progress-striped active">
+<div class="progress progress-striped progress-success active">
   <div class="bar" style="width:<%= 100*(1 - @poll.cup.games.where("kickoff > ?", Time.now).count.to_f/@poll.cup.games.count).round(2)%>%;"></div>
 </div>
 
@@ -35,6 +35,8 @@
 		  <tr>			
 			<td><%= user.name %></td>
 			<td><%= user.bets.where(poll_id: @poll.id).map{|bet| bet.total_points}.compact.sum %></td>	
+			
+			
 			<% if current_user.id === @poll.admin_id %>
 			     <% unless user.id === current_user.id %>
 			     <td><%= link_to "Sacar de la polla",  kick_out_polls_path(:id => @poll.id, :user_id =>user.id), :confirm => 'Esta seguro?', class: "btn btn-mini btn-danger"  %></td>
