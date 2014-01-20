@@ -6,14 +6,12 @@ class PagesController < ApplicationController
 	skip_filter :ensure_user, only: [:home]
 
 	def home
-		@title = "Homepage"
 		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(10)
-    @user = current_user
 	end
 
 	def main
-		#@games = current_user.games.where("kickoff > ?", Time.now).order(:kickoff).limit(50)
-		@games = current_user.games.order(:kickoff).limit(50).uniq
+		@games = current_user.games.where("kickoff > ?", Time.now).order(:kickoff).uniq.limit(20)
+		#@games = current_user.games.order(:kickoff).uniq
 	end
 	
 	def poll_view
@@ -27,12 +25,10 @@ class PagesController < ApplicationController
 	end
 
 	def about
-		@title = "About this project"
 		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(9)
 	end
 
 	def rules
-		@title = "Rules"
 		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(9)	
 	end
 end

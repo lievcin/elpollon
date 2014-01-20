@@ -1,14 +1,12 @@
 class PollsController < ApplicationController
 
 	before_filter :ensure_user, only: [:home]
-  
+
 	def index
-		@title = "List of polls"
-		@polls = Poll.all
+		@polls = current_user.polls
 	end
 
 	def new
-		@title = "New poll"
 		@user = current_user
 		@poll = Poll.new
 		@poll.admin_id = @user.id
@@ -21,29 +19,24 @@ class PollsController < ApplicationController
 	end
 
 	def edit
-		@title = "Poll edit"
 		@user = current_user
 		@poll = Poll.find(params[:id])
 		if @poll.admin_id != @user.id
 			flash[:error] = "The poll can only be edited by the administrator!"
-			redirect_to root_path
+			redirect_to main_path
 		end
 	end
 
-	def invite
-    #something to be set up here... 
-	end 
-
 	def create
-		@poll = Poll.new(params[:poll])
-		@user = current_user
+		@poll = Poll.new(poll_attributes)
+
 		if @poll.save
-		  @user.polls << @poll
-			flash[:success] = "Poll created successfully"
+		  current_user.polls << @poll
+			flash[:success] = "Polla creada."
 			redirect_to @poll
 		else
-			flash[:error] = "Error!"
-			redirect_to :back
+			flash[:error] = "Ha ocurrido un error!"
+			render "new"
 		end
 	end
 
@@ -56,19 +49,19 @@ class PollsController < ApplicationController
 			@password_change = true
 		end
 		if @poll.update_attributes(params[:poll])
-			flash[:success] = "Poll updated."
+			flash[:success] = "Polla actualizada."
 			redirect_to @poll
 		else
-			flash[:error] = "Error!"
-			redirect_to :back
+			flash[:error] = "Ha ocurrido un error!"
+			render "edit"
 		end
 	end
 
 	def destroy
-		@poll = Poll.find(params[:id])
-		@poll.destroy		
-		flash[:success] = "Poll deleted"
-		redirect_to main_path
+		poll = Poll.find(params[:id])
+		poll.destroy
+		flash[:success] = "Poll destruida"
+		redirect_to polls_path
 	end
 
 	def join
@@ -81,17 +74,17 @@ class PollsController < ApplicationController
 		@password = params[:poll_pass]
 		unless params[:poll_search].nil?
 			if @poll.nil?
-				flash[:error] = "Poll not found."
+				flash[:error] = "La polla no ha sido encontrada."
 				redirect_to :back
 			else
 				unless @password.nil?
 					if @password === @poll.password and @poll.users.include?(@user) == false
 						@user.polls << @poll
-						flash[:success] = "Joined the poll!"
+						flash[:success] = "Ya eres parte de la polla!"
 						redirect_to root_path
 					else
-						flash[:error] = "Name and password don't match"
-						redirect_to :back
+						flash[:error] = "El nombre y la clave de la polla no coinciden"
+      			render "join"
 					end
 				end
 			end
@@ -99,25 +92,29 @@ class PollsController < ApplicationController
 	end
 
 	def leave
-    #something to be set up here... 
+    #something to be set up here...
 	end
 
 	def kick_out
   		@poll = Poll.find(params[:id])
   		@user = User.find(params[:user_id])
   		@poll.users.delete(@user)
-			flash[:success] = @user.name + " has been kicked out of the poll!"
-  		redirect_to @poll
+			flash[:success] = @user.name + " ha sido sacado de la polla"
+      render "ranking"
   end
-  
+
   def ranking
-		@poll = Poll.find(params[:id])    
+		@poll = Poll.find(params[:id])
   end
-  
+
   def members
-		@poll = Poll.find(params[:id])    
+		@poll = Poll.find(params[:id])
   end
-  
-  
-  
+
+private
+
+  def poll_attributes
+  	params[:poll].merge(admin_id: current_user.id)
+  end
+
 end

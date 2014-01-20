@@ -10,8 +10,8 @@
     <%= f.input :home_score %>
     <%= f.input :away_score %>
     <%= f.input :round_id, :as => :hidden, :input_html => { :value => @round.id }%>
-    <%= f.input :home_team, :collection => @teams %>
-    <%= f.input :away_team, :collection => @teams %>
+    <%= f.input :home_team_id, :collection => @teams %>
+    <%= f.input :away_team_id, :collection => @teams %>
   </div>
   <% unless @game.away_score.nil? %>
     <div class="field">

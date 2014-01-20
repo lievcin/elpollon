@@ -36,4 +36,3 @@ $ ->
       message: "Juguemos juntos la pollón!"
     , requestCallback
 
-

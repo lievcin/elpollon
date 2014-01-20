@@ -23,9 +23,9 @@ class BetsController < ApplicationController
 
 		if @bet.save
 			redirect_to :back
-			flash[:success] = "Bet created."
+			flash[:success] = "Apuesta creada."
 		else
-			flash[:error] = "Error!"
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to :back
 		end
   end
@@ -34,17 +34,17 @@ class BetsController < ApplicationController
 		@bet = Bet.find(params[:id])
 
 		if @bet.update_attributes(params[:bet])
-			flash[:success] = "Updated."
+			flash[:success] = "Apuesta actualizada."
 			redirect_to :back
 		else
-			flash[:error] = "Error!"
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to :back
 		end
   end
 
   def destroy
 		Bet.find(params[:id]).destroy
-		flash[:success] = "Bet destroyed."
+		flash[:success] = "Apuesta destruida."
 		redirect_to :back
   end
 

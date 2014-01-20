@@ -7,5 +7,4 @@ class Cup < ActiveRecord::Base
 	has_many :teams
 
 	validates :name,	:presence => true, :uniqueness => true
-	validates :description,	:presence => true
 end

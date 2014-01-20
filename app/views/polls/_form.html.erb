@@ -1,13 +1,12 @@
 <%= simple_form_for @poll, :html => { :class => 'form-horizontal' } do |f| %>
 
   <%= f.error_notification %>
-  <%= f.input :name %>
-  <%= f.input :password %>
-  <%= f.input :admin_id, as: :hidden %>
-  <%= f.association :cup %>
+  <%= f.input :name, label: 'Nombre de la polla' %>
+  <%= f.input :password, as: :password_reveal, label: 'Clave', :hint => '6 a 20 letras.' %>
+  <%= f.association :cup, label: 'Elige la competencia' %>
   <div class="form-actions">
-    <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to 'Cancel', main_path, :class => 'btn btn-danger' %>
+    <%= f.button :submit, 'Guardar polla', :class => 'btn-success'%>
+    <%= link_to 'Cancelar', main_path, :class => 'btn btn-danger' %>
   </div>
 
 <% end %>

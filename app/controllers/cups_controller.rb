@@ -1,18 +1,14 @@
 class CupsController < ApplicationController
-	#before_filter :authenticate_user!
 	
 	def index
-		@title = "Overview competitions"
 		@cups = Cup.all
 	end
 
 	def new
-		@title = "Create competition"
 		@cup = Cup.new
 	end
 
 	def edit
-		@title = "Competition progress"
 		@cup = Cup.find(params[:id])
 	end
 
@@ -20,10 +16,10 @@ class CupsController < ApplicationController
 		@cup = Cup.new(params[:cup])
 
 		if @cup.save
-			flash[:success] = "Successfully Created"
+			flash[:success] = "Competencia creada"
 			redirect_to cups_path
 		else
-			flash[:error] = "Error!"
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to :back
 		end
 	end
@@ -32,17 +28,17 @@ class CupsController < ApplicationController
 		@cup = Cup.find(params[:id])
 
 		if @cup.update_attributes(params[:cup])
-			flash[:success] = "Competitive Progress"
+			flash[:success] = "Competencia actualizada"
 			redirect_to cups_path
 		else
-			flash[:error] = "Error!"
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to :back
 		end
 	end
 
 	def destroy
 		Cup.find(params[:id]).destroy
-		flash[:success] = "Competition deleted"
+		flash[:success] = "Competencia destruida"
 		redirect_to :back
 	end
 
