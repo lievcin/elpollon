@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117212321) do
+ActiveRecord::Schema.define(version: 20140120210709) do
 
   create_table "bets", force: true do |t|
     t.integer  "user_id"
@@ -55,11 +55,11 @@ ActiveRecord::Schema.define(version: 20140117212321) do
 
   create_table "polls", force: true do |t|
     t.string   "name"
-    t.string   "password"
     t.integer  "admin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "cup_id"
+    t.string   "group_key"
   end
 
   create_table "polls_users", id: false, force: true do |t|

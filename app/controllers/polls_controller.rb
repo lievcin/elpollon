@@ -81,7 +81,7 @@ class PollsController < ApplicationController
 					if @password === @poll.password and @poll.users.include?(@user) == false
 						@user.polls << @poll
 						flash[:success] = "Ya eres parte de la polla!"
-						redirect_to root_path
+						redirect_to poll_path(@poll)
 					else
 						flash[:error] = "El nombre y la clave de la polla no coinciden"
       			render "join"
