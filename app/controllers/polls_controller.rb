@@ -58,10 +58,10 @@ class PollsController < ApplicationController
 	end
 
 	def destroy
-		@poll = Poll.find(params[:id])
-		@poll.destroy
+		poll = Poll.find(params[:id])
+		poll.destroy
 		flash[:success] = "Poll destruida"
-		redirect_to main_path
+		redirect_to polls_path
 	end
 
 	def join
