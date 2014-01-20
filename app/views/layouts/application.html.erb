@@ -17,7 +17,7 @@
                 <li><%= link_to "Crear una polla", new_poll_path %></li>
                 <li><%= link_to "Unirme a una polla", join_path %></li>
                 <br />
-                <li>Lista de pollas</li>
+				<li class="divider"></li>				
 				<% current_user.polls.each do |poll| %>
 				  <li><%= link_to poll.name, poll_path(:id => poll.id), :class => "list-group-item"%></li>
 				<% end %>
