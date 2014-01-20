@@ -1,9 +1,11 @@
-<div class="ss-header">
-	<h3><%= link_to @poll.name, poll_path(:id => @poll.id)%>		
+<div class="content-header">
+	<h3>
+		<a id="menu-toggle" href="#" class="btn btn-mini"><i class="icon-align-justify"></i></a>
+    	<%= link_to @poll.name, poll_path(:id => @poll.id)%>		
 		<small class= "poll-actions pull-right">
 		  <div class="btn-group">
 			
-			<a class="btn btn-mini" href="#password" data-toggle="modal" id="#icon-fire"><i class="icon-fire"></i></a>
+			<a class="btn btn-mini" href="#password" data-toggle="modal" id="#icon-fire"><i class="icon-globe"></i></a>
 			
 			<button class="btn btn-mini">Administrar</button>
 		  	<button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
@@ -21,11 +23,12 @@
 		  </div>		
 	    </small>
 	</h3>
+	<div class="progress progress-striped progress-success active">
+	  <div class="bar" style="width:<%= 100*(1 - @poll.cup.games.where("kickoff > ?", Time.now).count.to_f/@poll.cup.games.count).round(2)%>%;"></div>
+	</div>	
 </div>
 
-<div class="progress progress-striped active">
-  <div class="bar" style="width:<%= 100*(1 - @poll.cup.games.where("kickoff > ?", Time.now).count.to_f/@poll.cup.games.count).round(2)%>%;"></div>
-</div>
+
 
 <div id="password" class="modal hide fade">
   <div class="modal-header">
