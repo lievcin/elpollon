@@ -78,8 +78,8 @@
 					    <%= f.number_field :home_bet, disabled: true %> :
 					    <%= f.number_field :away_bet, disabled: true %>
 					  <% else %>
-					    <%= f.number_field :home_bet, :class => 'submittable' %> :
-					    <%= f.number_field :away_bet, :class => 'submittable' %>
+					    <%= f.number_field :home_bet, input_html: { min: 0 }, :class => 'submittable' %> :
+					    <%= f.number_field :away_bet, input_html: { min: 0 }, :class => 'submittable' %>
 					  <% end %>
 				    <% end %>
 				</td>
