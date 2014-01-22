@@ -1,6 +1,7 @@
 class PollsController < ApplicationController
 
 	before_filter :ensure_user, only: [:home]
+	skip_filter :ensure_manager
 
 	def index
 		@polls = current_user.polls

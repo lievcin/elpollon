@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_filter :ensure_user, only: [:create]
+  skip_filter :ensure_manager
 
   def create
     user = User.from_omniauth(env["omniauth.auth"])

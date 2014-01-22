@@ -18,7 +18,7 @@ private
   end
 
   def ensure_manager
-    redirect_to root_path unless current_user.is_management?
+    redirect_to main_path unless current_user.is_management?
   end
 
 end
