@@ -6,6 +6,8 @@
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
+
 </head>
 <body>
     <div id="wrapper">
@@ -19,9 +21,15 @@
                 <li><%= link_to "Unirme a una polla", join_path %></li>
                 <br />
 				<li class="divider"></li>
+				<li><a>Lista de pollas</a></li>
+				<pre class="pre-scrollable">
 				<% current_user.polls.each do |poll| %>
-				  <li><%= link_to poll.name, poll_path(:id => poll.id), :class => "list-group-item"%></li>
+				  <li><%= link_to '- ' + poll.name, poll_path(:id => poll.id), :class => "list-group-item"%></li>
 				<% end %>
+				</pre>	
+				<li class="divider"></li>
+				<li><%= link_to "Reglas", rules_path %></li>
+				<li><%= link_to current_user.name + "  -  Salida", signout_path, id: "sign_out" %></li>
             </ul>
         </div>
 

@@ -20,7 +20,6 @@ class BetsController < ApplicationController
 
   def create
 		@bet = Bet.new(params[:bet])
-
 		if @bet.save
 			redirect_to :back
 			flash[:success] = "Apuesta creada."

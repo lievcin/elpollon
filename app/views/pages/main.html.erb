@@ -1,15 +1,36 @@
 	<% if @games.empty? %>
-	<div>		
-		<div class="content-header">
-			<h2>
-			  <a id="menu-toggle" href="#" class="btn btn-mini"><i class="icon-align-justify"></i></a>
-			  Bienvenido al Pollón!
-			</h2>
-			<h3>
-			  Bienvenido al Pollón!
-			</h3>			
-
+	<div class="content-header">	
+	  <div class="row-fluid">
+	    <h2 id="main_title">
+	      <a id="menu-toggle" href="#" class="btn btn-mini"><i class="icon-align-justify"></i></a>
+	      Bienvenido al Pollón!
+		</h2>		
+		<br/>			
+	  </div>
+	  <div class="row-fluid">
+	    <div class="span4">	      
+	      <h2><%= image_tag("create_poll.jpg", id: 'main_steps', class: "img-rounded") %></h2>
 		</div>
+	    <div class="span4">	      
+	      <h2><%= image_tag("fb_invite.jpg", id: 'main_steps', class: "img-rounded") %></h2>
+		</div>
+	    <div class="span4">	      
+	      <h2><%= image_tag("compete_and_win.jpg", id: 'main_steps', class: "img-rounded") %></h2>
+		</div>		
+	  </div>
+	  <br/>				
+	  <div class="row-fluid">
+	    <div class="span4">
+		  <h3>Crea tu propia polla, escoge un torneo</h3>
+		</div>
+	    <div class="span4">
+		  <h3>Invíta a tus amigos de Facebook </h3>
+		</div>
+	    <div class="span4">
+		  <h3>Compite con tus amigos y demuestra quién es el mejor!</h3>
+		</div>				
+      </div>		
+	</div>
 		
 	</div>	
 	
@@ -17,23 +38,22 @@
 	<div class="content-header">
 		<h2>
 		  <a id="menu-toggle" href="#" class="btn btn-mini"><i class="icon-align-justify"></i></a>
-		  Partidos
+		  Próximos partidos
 		</h2>
 
 	  	
-		<table class="table">
-			<tr>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>
-			  <th></th>						
-			</tr>			
+	    <table class="table table-curved table-condensed" id="partidos">
+			<thead class='header'>
+			  <th>Fecha</th>
+			  <th colspan=2>Local</th>
+			  <th>Resultado</th>
+			  <th colspan=2>Visitante</th>
+			</thead>
+			<tbody>									
 			<% @games.each do |game| %>
 			
 			  <tr>
-				<td><%= game.kickoff.in_time_zone(Time.zone).to_formatted_s(:short) %></td>				
+				<td><%= game.kickoff.in_time_zone(Time.zone).strftime("%m/%d/%Y") %></td>				
 				<td><%= truncate(Team.find(game.home_team_id).name, :length => 20) %></td>
 				<td><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>				
 				<td> VS </td>
@@ -41,6 +61,7 @@
 				<td><%= truncate(Team.find(game.away_team_id).name, :length => 20) %></td>				
 			   </tr>	
 			<% end %>
+			</tbody>						
 		</table>
 	</div>
 	<% end %>	

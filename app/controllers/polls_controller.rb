@@ -45,7 +45,7 @@ class PollsController < ApplicationController
 		if @poll.name_changed?
 			@name_change = true
 		end
-		if @poll.password_changed?
+		if @poll.group_key_changed?
 			@password_change = true
 		end
 		if @poll.update_attributes(params[:poll])
@@ -61,7 +61,7 @@ class PollsController < ApplicationController
 		poll = Poll.find(params[:id])
 		poll.destroy
 		flash[:success] = "Poll destruida"
-		redirect_to polls_path
+		redirect_to main_path
 	end
 
 	def join
@@ -71,14 +71,14 @@ class PollsController < ApplicationController
 		else
 			@poll =  Poll.find_by_name(params[:poll_search])
 		end
-		@password = params[:poll_pass]
+		@group_key = params[:poll_key]
 		unless params[:poll_search].nil?
 			if @poll.nil?
 				flash[:error] = "La polla no ha sido encontrada."
 				redirect_to :back
 			else
-				unless @password.nil?
-					if @password === @poll.password and @poll.users.include?(@user) == false
+				unless @group_key.nil?
+					if @group_key === @poll.group_key and @poll.users.include?(@user) == false
 						@user.polls << @poll
 						flash[:success] = "Ya eres parte de la polla!"
 						redirect_to poll_path(@poll)

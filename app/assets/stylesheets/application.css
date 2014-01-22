@@ -13,6 +13,10 @@
  *= require_tree .
  */
 
+#sign_out{
+  background-color: #cc0031;	
+}
+
 #brand_logo {
   width: 100px;
   height: 100px;
@@ -31,23 +35,38 @@
   background-color: transparent;
 }
 
+.new_bet {
+  height: 20px;
+  margin: 0px;
+}
+
+.edit_bet {
+  height: 20px;
+  margin: 0px;
+}
+
 input#bet_home_bet {
-  width: 40px;
-  margin-bottom: 0px;
+  width: 30px;
 }
 input#bet_away_bet {
-  width: 40px;
-  margin-bottom: 0px;
-}
-#team_logo {
   width: 30px;
-  height: 30px;
+}
+
+#team_logo {
+  width: 25px;
+  height: 25px;
   margin-bottom: 0px;
 }
 
 #cup_logo_main {
   width: 100px;
   height: 100px;
+  margin-bottom: 0px;
+}
+
+#main_steps {
+  width: 200px;
+  height: 200px;
   margin-bottom: 0px;
 }
 
