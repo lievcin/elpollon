@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-
 class RoundsController < ApplicationController
-	
+
 	def index
 		@title = "Rounds"
 		@cup = Cup.find(params[:cup_id])

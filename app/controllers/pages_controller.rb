@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   layout 'landing', :only => [:home]
 
 	skip_filter :ensure_user, only: [:home]
+	skip_filter :ensure_manager
 
 	def home
 		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(10)
@@ -13,13 +14,13 @@ class PagesController < ApplicationController
 		@games = current_user.games.where("kickoff > ?", Time.now).order(:kickoff).uniq.limit(20)
 		#@games = current_user.games.order(:kickoff).uniq
 	end
-	
+
 	def poll_view
 	  @poll  = Poll.find(params[:poll_id])
 		@games = current_user.polls.find(params[:poll_id]).games
 		@new_bet = Bet.new
-	end	
-	
+	end
+
 	def admin
 		@title = "Admin Overview"
 	end
@@ -29,6 +30,6 @@ class PagesController < ApplicationController
 	end
 
 	def rules
-		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(9)	
+		@games = Game.where("kickoff > ?", Time.now).order(:kickoff).limit(9)
 	end
 end

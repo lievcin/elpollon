@@ -1,7 +1,5 @@
 class CupsController < ApplicationController
 
-	before_filter :ensure_manager
-
 	def index
 		@cups = Cup.all
 	end
@@ -46,11 +44,5 @@ class CupsController < ApplicationController
 
 	def choose_teams
 		@cup = Cup.find(params[:id])
-	end
-
-private
-
-	def ensure_manager
-		redirect_to root_path unless current_user.is_management?
 	end
 end
