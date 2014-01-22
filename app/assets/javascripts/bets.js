@@ -13,4 +13,3 @@ $( document ).on( "change", ".submittable", function() {
   });
 
 });
-

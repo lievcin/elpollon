@@ -1,5 +1,8 @@
 <%- model_class = Poll -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+  <h1>
+    <a id="menu-toggle" href="#" class="btn btn-mini"><i class="icon-align-justify"></i></a>
+	Editar Polla
+  </h1>
 </div>
 <%= render :partial => 'form' %>

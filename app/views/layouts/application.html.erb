@@ -22,11 +22,11 @@
                 <br />
 				<li class="divider"></li>
 				<li><a>Lista de pollas</a></li>
-				<pre class="pre-scrollable">
+				<ul id="polls-list">
 				<% current_user.polls.each do |poll| %>
-				  <li><%= link_to '- ' + poll.name, poll_path(:id => poll.id), :class => "list-group-item"%></li>
+				  <li><%= link_to poll.name, poll_path(:id => poll.id), :class => "list-group-item"%></li>
 				<% end %>
-				</pre>	
+				</ul>	
 				<li class="divider"></li>
 				<li><%= link_to "Reglas", rules_path %></li>
 				<li><%= link_to current_user.name + "  -  Salida", signout_path, id: "sign_out" %></li>

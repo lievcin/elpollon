@@ -13,6 +13,13 @@
  *= require_tree .
  */
 
+
+#polls-list {
+  max-height: 200px;
+  list-style-type: none;
+  overflow: scroll;
+}
+
 #sign_out{
   background-color: #cc0031;	
 }
