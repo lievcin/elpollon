@@ -3,6 +3,7 @@ Cup.delete_all
 Game.delete_all
 Round.delete_all
 Team.delete_all
+Poll.destroy_all
 
 cup1 = Cup.create(name: "Colombia - Apertura 2014", start_date: "25-01-2014", end_date: "21-05-2014", logo: 'http://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/112011/liga_postobon.ai-converted.png')
 cup2 = Cup.create(name: "Barclays Premier League 2013/14", start_date: "17-08-2013", end_date: "11-05-2014", logo: 'http://informationng.com/wp-content/uploads/2013/04/Barclays%2BPremier%2BLeague.jpg')
