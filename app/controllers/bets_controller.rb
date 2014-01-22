@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class BetsController < ApplicationController
   before_filter :ensure_user
-  skip_filter :ensure_manager, except: [:destroy]
+  skip_filter :ensure_manager, except: [:index, :show, :destroy]
 
   def index
     @bets = Bet.all
@@ -20,7 +20,7 @@ class BetsController < ApplicationController
   end
 
   def create
-		@bet = Bet.new(params[:bet])
+		@bet = Bet.new(bet_attributes)
 		if @bet.save
 			redirect_to :back
 			flash[:success] = "Apuesta creada."
@@ -33,7 +33,7 @@ class BetsController < ApplicationController
   def update
 		@bet = Bet.find(params[:id])
 
-		if @bet.update_attributes(params[:bet])
+		if @bet.update_attributes(bet_attributes)
 			flash[:success] = "Apuesta actualizada."
 			redirect_to :back
 		else
@@ -47,5 +47,11 @@ class BetsController < ApplicationController
 		flash[:success] = "Apuesta destruida."
 		redirect_to :back
   end
+
+  private
+
+    def bet_attributes
+    	params[:bet].merge(user_id: current_user.id)
+    end
 
 end

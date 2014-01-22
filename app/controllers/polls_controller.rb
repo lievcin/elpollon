@@ -60,9 +60,13 @@ class PollsController < ApplicationController
 
 	def destroy
 		poll = Poll.find(params[:id])
-		poll.destroy
-		flash[:success] = "Poll destruida"
-		redirect_to main_path
+		if poll.admin_id != @user.id
+		  poll.destroy
+		  flash[:success] = "Poll destruida"
+		else 
+		  flash[:error] = "The poll can only be edited by the administrator!"
+		end
+	  redirect_to main_path		
 	end
 
 	def join
