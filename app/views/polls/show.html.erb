@@ -72,7 +72,7 @@
 				<td><%= truncate(Team.find(game.away_team_id).name, :length => 20) %></td>
 
 				<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
-
+				
 				<% if @bet.empty? %>
 				<td>
 					<%= simple_form_for(@new_bet, :remote => true) do |f| %>
