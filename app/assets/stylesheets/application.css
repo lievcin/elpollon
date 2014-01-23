@@ -13,11 +13,22 @@
  *= require_tree .
  */
 
+.intro {
+  font-size: 20px;
+}
+
+.intro-sub {
+  font-size: 18px;
+}
 
 #polls-list {
   max-height: 200px;
   list-style-type: none;
   overflow: scroll;
+}
+
+#feedback{
+  background-color: #006dcc;	
 }
 
 #sign_out{

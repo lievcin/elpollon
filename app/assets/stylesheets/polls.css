@@ -1,8 +1,11 @@
+body {
+  background: #F2F2F2;
+  background-color: #F2F2F2;;
+}
 
 .poll-actions {
   line-height: inherit;
 }
-
 
 pre {
     height: auto;
@@ -15,12 +18,15 @@ pre {
 	background-color: #145963;
 }​
 
-
-thead {
-  background-color: #eaeaea;
+table.floatThead-table {
 }
-tbody {
-  background-color: #fcfcfc;
+
+.table-curved thead {
+  background: #118d56;
+  color: #fff;
+}
+.table-curved tbody {
+  color: black;
 }
 
 .table-curved tr {

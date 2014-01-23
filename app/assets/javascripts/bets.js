@@ -13,3 +13,7 @@ $( document ).on( "change", ".submittable", function() {
   });
 
 });
+
+$(document).ready(function() {
+  $("#partidos").floatThead()
+});

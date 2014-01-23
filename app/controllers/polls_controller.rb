@@ -20,10 +20,9 @@ class PollsController < ApplicationController
 	end
 
 	def edit
-		@user = current_user
 		@poll = Poll.find(params[:id])
-		if @poll.admin_id != @user.id
-			flash[:error] = "The poll can only be edited by the administrator!"
+		if @poll.admin_id != current_user.id
+			flash[:error] = "Ha ocurrido un error!"
 			redirect_to main_path
 		end
 	end
@@ -60,11 +59,11 @@ class PollsController < ApplicationController
 
 	def destroy
 		poll = Poll.find(params[:id])
-		if poll.admin_id != @user.id
+		if poll.admin_id == current_user.id
 		  poll.destroy
 		  flash[:success] = "Poll destruida"
 		else 
-		  flash[:error] = "The poll can only be edited by the administrator!"
+		  flash[:error] = "Ha ocurrido un error!"
 		end
 	  redirect_to main_path		
 	end
@@ -105,21 +104,35 @@ class PollsController < ApplicationController
   		@user = User.find(params[:user_id])
   		@poll.users.delete(@user)
 			flash[:success] = @user.name + " ha sido sacado de la polla"
-      render "ranking"
+			redirect_to ranking_path(id: @poll.id)
   end
 
   def ranking
 		@poll = Poll.find(params[:id])
+		@rank_users = get_ranking(@poll)
+		#binding.pry
   end
 
   def members
 		@poll = Poll.find(params[:id])
   end
 
+
+
+
 private
 
   def poll_attributes
   	params[:poll].merge(admin_id: current_user.id)
   end
+
+	def get_ranking(poll)
+		user_ranking = Hash.new {|h,k| h[k] = []}
+		poll.users.each do |user|
+		  user_ranking[user.id] << user.bets.where(poll_id: poll.id).map{|bet| bet.total_points}.compact.sum
+		end
+		return user_ranking
+	end
+
 
 end

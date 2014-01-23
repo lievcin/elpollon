@@ -33,6 +33,6 @@ $ ->
     event.preventDefault()
     FB.ui
       method: "apprequests"
-      message: "Juguemos juntos la pollón!"
+      message: "Juguemos juntos al pollón - la polla de fútbol en linea!"
     , requestCallback
 
