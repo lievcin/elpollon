@@ -16,4 +16,5 @@ $( document ).on( "change", ".submittable", function() {
 
 $(document).ready(function() {
   $("#partidos").floatThead()
+  $("#results_table").floatThead()
 });

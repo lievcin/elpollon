@@ -13,6 +13,23 @@
  *= require_tree .
  */
 
+input#game_home_score {
+  width: 30px;
+}
+input#game_away_score {
+  width: 30px;
+}
+
+input#game_home_score_et {
+  width: 30px;
+}
+input#game_away_score_et {
+  width: 30px;
+}
+
+
+
+
 .intro {
   font-size: 20px;
 }

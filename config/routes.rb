@@ -25,6 +25,7 @@ Elpollon::Application.routes.draw do
   resources :games do
     collection do
       get :result_index
+      get :mass_game_edit      
     end
     member do
       get :fix_result

@@ -73,7 +73,13 @@ class GamesController < ApplicationController
 	def result_index
 		@title = "Results"
 		#@games = Game.where("kickoff < ?", Time.now).where(home_score: nil).order(:kickoff).limit(36)
-		@games = Game.where("kickoff < ?", Time.now).order(:kickoff).limit(36)		
+		@games = Game.where("kickoff < ?", Time.now).order(:kickoff)
 	end
 
+	def mass_game_edit
+		@title = "Results"
+		@games = Game.where("kickoff > ?", Time.now).order(:kickoff)
+	end
+
+	
 end

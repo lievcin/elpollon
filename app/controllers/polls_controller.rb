@@ -15,7 +15,7 @@ class PollsController < ApplicationController
 
 	def show
 		@poll = Poll.find(params[:id])
-		@games = current_user.polls.find(params[:id]).games
+		@games = current_user.polls.find(params[:id]).games.sort_by { |game| game[:kickoff] }		
 		@new_bet = Bet.new
 	end
 
