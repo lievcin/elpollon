@@ -46,7 +46,7 @@
 
 	    <table class="table table-curved" id="partidos">
 			<thead class='header'>
-			  <th>Fecha</th>
+			  <th>Fecha (Hora Colombia)</th>
 			  <th colspan=2>Local</th>
 			  <th>Resultado</th>
 			  <th colspan=2>Visitante</th>
@@ -56,7 +56,7 @@
 			<tbody>
 			<% @games.each do |game| %>
 			  <tr>
-				<td><%= game.kickoff.localtime.strftime("%d/%m/%Y %H:%M") %></td>
+				<td><%= game.kickoff.in_time_zone('Bogota').strftime("%d/%m/%Y %H:%M") %></td>
 				<td><%= truncate(Team.find(game.home_team_id).name, :length => 20) %></td>
 				<td><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>
 				<% if game.home_score.nil? %>
@@ -68,7 +68,7 @@
 				<td><%= truncate(Team.find(game.away_team_id).name, :length => 20) %></td>
 
 				<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
-				
+
 				<% if @bet.empty? %>
 				<td>
 					<%= simple_form_for(@new_bet, :remote => true) do |f| %>

@@ -1,27 +1,27 @@
 <% if @games.empty? %>
-  <div class="ss-header">	
+  <div class="ss-header">
 	  <h2 id="main_title">
 	    <a id="menu-toggle" href="#" class="btn btn-mini"><i class="icon-align-justify"></i></a>
 	    Bienvenido al Pollón!
-      </h2>		
+      </h2>
 	  <p3 class="intro">El Pollón es una aplicación web que permite crear pollas o quinielas con tus amigos de Facebook.</p>
   </div>
-  
-  <br />								
-	
-  <div>	
-    <li class="intro-sub">El menú de navegación podrás crear o unirte a una polla.</p>	
-	<li class="intro-sub">Si decides crear una polla debes escoger un nombre y una clave, la cual deberás compartir con tus amigos para que ellos también puedan unirse a ella. Tambien escoge el campeonato en el que quieres competir.</li>				
-	<li class="intro-sub">En las páginas de cada polla y en la aplicacion busca este simbolo <a class="btn btn-mini btn-primary" href="#"><i class="icon-white icon-share"></i></a> en caso de que no recuerdes la clave de la polla.</li>							
-	<li class="intro-sub">De la misma manera, si quieres unirte a una, cualquiera de los miembros de la polla podrá darte el nombre y clave para poder ingresar a ella.</li>						
-	<li class="intro-sub">Las predicciones solo se admiten antes del comienzo del partido, y los puntos son calculados una vez que el resultado aparece en el sistema. Esto no es instantáneo y puede demorar algunos minutos después del pitazo final.</li>				
-	<li class="intro-sub">Las predicciones pueden ser editadas cuantas veces el usuario lo requiera, siempre y cuando sea antes del comienzo del partido.</li>							
-	<li class="intro-sub">Los puntos son asignados de acuerdo a las reglas, mirar sección reglas...</p>							
-	<br />								
+
+  <br />
+
+  <div>
+    <li class="intro-sub">El menú de navegación podrás crear o unirte a una polla.</p>
+	<li class="intro-sub">Si decides crear una polla debes escoger un nombre y una clave, la cual deberás compartir con tus amigos para que ellos también puedan unirse a ella. Tambien escoge el campeonato en el que quieres competir.</li>
+	<li class="intro-sub">En las páginas de cada polla y en la aplicacion busca este simbolo <a class="btn btn-mini btn-primary" href="#"><i class="icon-white icon-share"></i></a> en caso de que no recuerdes la clave de la polla.</li>
+	<li class="intro-sub">De la misma manera, si quieres unirte a una, cualquiera de los miembros de la polla podrá darte el nombre y clave para poder ingresar a ella.</li>
+	<li class="intro-sub">Las predicciones solo se admiten antes del comienzo del partido, y los puntos son calculados una vez que el resultado aparece en el sistema. Esto no es instantáneo y puede demorar algunos minutos después del pitazo final.</li>
+	<li class="intro-sub">Las predicciones pueden ser editadas cuantas veces el usuario lo requiera, siempre y cuando sea antes del comienzo del partido.</li>
+	<li class="intro-sub">Los puntos son asignados de acuerdo a las reglas, mirar sección reglas...</p>
+	<br />
 	<p class="intro">Buena suerte!!!</p>
   </div>
-			
-<% else %>	
+
+<% else %>
   <div class="content-header">
     <h3>
 	<a id="menu-toggle" href="#" class="btn btn-mini"><i class="icon-align-justify"></i></a>
@@ -29,30 +29,28 @@
 	</h3>
   </div>
 
-  <div>	
+  <div>
     <table class="table table-curved table-condensed" id="partidos">
 	  <thead class='header'>
-	    <th>Fecha</th>
+	    <th>Fecha (Hora Colombia)</th>
 		<th colspan=2>Local</th>
 		<th>Resultado</th>
 		<th colspan=2>Visitante</th>
 	  </thead>
-	  <tbody>									
-	    <% @games.each do |game| %>			
-	      <tr>				
-		    <% if (game.kickoff - Time.now) > 1.week %>				
-		      <td><%= distance_of_time_in_words(Time.now, game.kickoff) %></td>
-		    <% else %>								
-			  <td><%= game.kickoff.in_time_zone(Time.zone).strftime("%d/%m/%Y %H:%M") %></td>				
-		    <% end %>												
+	  <tbody>
+	    <% @games.each do |game| %>
+	      <tr>
+
+			  <td><%= game.kickoff.in_time_zone("Bogota").strftime("%d/%m/%Y %H:%M") %></td>
+
 		    <td><%= truncate(Team.find(game.home_team_id).name, :length => 20) %></td>
-		    <td><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>				
+		    <td><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>
 		    <td> VS </td>
-		    <td><%= image_tag(Team.find(game.away_team_id).logo, :id => 'team_logo') %></td>												
-		    <td><%= truncate(Team.find(game.away_team_id).name, :length => 20) %></td>				
-		  </tr>	
+		    <td><%= image_tag(Team.find(game.away_team_id).logo, :id => 'team_logo') %></td>
+		    <td><%= truncate(Team.find(game.away_team_id).name, :length => 20) %></td>
+		  </tr>
 		<% end %>
-	  </tbody>						
+	  </tbody>
 	</table>
   </div>
-<% end %>	
+<% end %>
