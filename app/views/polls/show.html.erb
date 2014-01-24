@@ -5,9 +5,9 @@
 	 	</a>
 		<%= link_to @poll.name, poll_path(:id => @poll.id)%>
 		<small class= "poll-actions pull-right">
-		  <div class="btn-group">			
+		  <div class="btn-group">
 			<a class="btn btn-mini btn-primary" href="#password" data-toggle="modal" id="#icon-share"><i class="icon-white icon-share"></i></a>
-			<% if current_user.id === @poll.admin_id %>			
+			<% if current_user.id === @poll.admin_id %>
 			  <button class="btn btn-mini">Administrar</button>
 		  	  <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
 		        <span class="caret"></span>
@@ -16,7 +16,7 @@
 		    	  <li><%= link_to 'Editar', edit_poll_path(@poll) %></li>
 				  <li><%= link_to 'Destruir', @poll, method: :delete, data: { confirm: 'Esta seguro?' } %>
 		  	    </ul>
-			  <% end %>			
+			  <% end %>
 		  </div>
 		  <div class="btn-group">
 				<%= link_to "Clasificación", ranking_path(:id => @poll.id), class: "btn btn-mini btn-warning" %>
@@ -56,11 +56,7 @@
 			<tbody>
 			<% @games.each do |game| %>
 			  <tr>
-				<% if (game.kickoff - Time.now) > 1.week %>				
-				  <td><%= distance_of_time_in_words(Time.now, game.kickoff) %></td>
-				<% else %>								
-				  <td><%= game.kickoff.in_time_zone(Time.zone).strftime("%d/%m/%Y %H:%M") %></td>				
-				<% end %>												
+				<td><%= game.kickoff.localtime.strftime("%d/%m/%Y %H:%M") %></td>
 				<td><%= truncate(Team.find(game.home_team_id).name, :length => 20) %></td>
 				<td><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>
 				<% if game.home_score.nil? %>
