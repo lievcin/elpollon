@@ -12,6 +12,7 @@ gem 'active_link_to'
 gem 'will_paginate'
 #gem 'bootstrap-will_paginate'
 gem 'bootstrap-datetimepicker-rails'
+gem 'browser-timezone-rails'
 
 gem 'quiet_assets'
 gem 'thin'

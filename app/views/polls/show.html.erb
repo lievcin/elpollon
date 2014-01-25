@@ -46,7 +46,7 @@
 
 	    <table class="table table-curved" id="partidos">
 			<thead class='header'>
-			  <th>Fecha (Hora Colombia)</th>
+			  <th>Fecha</th>
 			  <th colspan=2>Local</th>
 			  <th>Resultado</th>
 			  <th colspan=2>Visitante</th>
@@ -56,7 +56,7 @@
 			<tbody>
 			<% @games.each do |game| %>
 			  <tr>
-				<td><%= game.kickoff.in_time_zone('Bogota').strftime("%d/%m/%Y %H:%M") %></td>
+				<td><%= game.kickoff.strftime("%d/%m/%Y %H:%M") %></td>
 				<td><%= truncate(Team.find(game.home_team_id).name, :length => 20) %></td>
 				<td><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>
 				<% if game.home_score.nil? %>
