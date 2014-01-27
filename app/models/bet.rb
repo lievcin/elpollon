@@ -13,5 +13,6 @@ class Bet < ActiveRecord::Base
   validates_numericality_of :home_bet, :numericality => { :greater_than_or_equal_to => 0, :only_integer => true }
   validates :away_bet,		:presence => true
   validates_numericality_of :away_bet, :numericality => { :greater_than_or_equal_to => 0, :only_integer => true }
+  validates_uniqueness_of		:game_id, :scope => [:user_id, :poll_id]
   	
 end
