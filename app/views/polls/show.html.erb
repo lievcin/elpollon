@@ -1,109 +1,108 @@
-<div class="ss-header">
-	<h3>
-	 	<a id="menu-toggle" href="#" class="btn btn-mini">
-	 		<i class="icon-align-justify"></i>
-	 	</a>
-		<%= link_to @poll.name, poll_path(:id => @poll.id)%>
-		<small class= "poll-actions pull-right">
-		  <div class="btn-group">
-			<a class="btn btn-mini btn-primary" href="#password" data-toggle="modal" id="#icon-share"><i class="icon-white icon-share"></i></a>
-			<% if current_user.id === @poll.admin_id %>
-			  <button class="btn btn-mini">Administrar</button>
-		  	  <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
-		        <span class="caret"></span>
-		  	  </button>
-				<ul class="dropdown-menu">
-		    	  <li><%= link_to 'Editar', edit_poll_path(@poll) %></li>
-				  <li><%= link_to 'Destruir', @poll, method: :delete, data: { confirm: 'Esta seguro?' } %>
-		  	    </ul>
-			  <% end %>
-		  </div>
-		  <div class="btn-group">
-				<%= link_to "Clasificación", ranking_path(:id => @poll.id), class: "btn btn-mini btn-warning" %>
-     		<%= link_to "Invitar amigos en Facebook", "#", class: "btn btn-mini btn-primary fb-invite" %>
-		  </div>
-	  </small>
-	</h3>
-	 <!--<div class="progress progress-striped progress-success active">
-	  <div class="bar" style="width:<%= 100*(1 - @poll.cup.games.where("kickoff > ?", Time.now).count.to_f/@poll.cup.games.count).round(2)%>%;"></div>
-      <span><%= (100*(1 - @poll.cup.games.where("kickoff > ?", Time.now).count.to_f/@poll.cup.games.count).round(2)).round(0).to_s + '% del torneo'%></span>
-	</div> -->
+<div class="page-header page-header-with-buttons">
+ <h1 class="pull-left">
+   <i class="icon-group"></i>
+   <span><%= link_to @poll.name, poll_path(:id => @poll.id)%></span>
+ </h1>
+ <% if current_user.id === @poll.admin_id %>
+   <div class="btn-group">
+     <a class="btn btn-xs btn-warning" href="<%= edit_poll_path(@poll) %>"><i class="icon-edit"></i></a>
+     <a class="btn btn-xs btn-danger" href="<%=poll_path(@poll)%>" data-confirm="Esta seguro?" data-method="delete" rel="nofollow"><i class="icon-trash"></i></a>	
+   </div>  
+ <% end %>	
+
+	<small class= "poll-actions pull-right">
+	  <div class="btn-group">
+	      <a class="btn btn-xs btn-info" data-toggle="modal" href="#password"><i class="icon-white icon-key"></i> Mostrar clave</a>		
+	      <a class="btn btn-xs btn-contrast" href="<%=ranking_path(:id => @poll.id)%>"><i class="icon-white icon-signal"></i> Clasificación</a>		
+	      <a class="btn btn-xs btn-primary fb-invite" href="#"><i class="icon-white icon-facebook"></i> Invitar amigos</a>						
+	  </div>
+ </small>
 </div>
 
-<div id="password" class="modal hide fade">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Comparte esta polla!</h3>
+<div class="modal fade" id="password" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+       <div class="modal-header">
+         <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
+         <h4 class="modal-title">Comparte esta polla!</h4>
+       </div>
+       <div class="modal-body">
+         <h4>Para que tus amigos se puedan unir a la polla comparte estos datos.</h4>
+         <hr>
+  	     <p>Nombre: <strong><%= @poll.name %></strong></p>
+	     <p>Clave: <strong><%= @poll.group_key %></strong></p>
+       </div>
+       <div class="modal-footer">
+         <button class="btn btn-primary" data-dismiss="modal" type="button">Cerrar</button>
+       </div>
+     </div>
+    </div>
   </div>
-  <div class="modal-body">
-    <p>Para que tus amigos se puedan unir a la polla comparte estos datos</p>
-    <p>Nombre: <strong><%= @poll.name %></strong></p>
-    <p>Clave: <strong><%= @poll.group_key %></strong></p>
-  </div>
-</div>
+<div>
 
-	<div>
-
-	    <table class="table table-curved" id="partidos">
-			<thead class='header'>
-			  <th>Fecha</th>
-			  <th colspan=2>Local</th>
-			  <th>Resultado</th>
-			  <th colspan=2>Visitante</th>
-			  <th>Apuesta</th>
-			  <th>Puntos</th>
-			</thead>
-			<tbody>
-			<% @games.each do |game| %>
-			  <tr>
-				<td><%= game.kickoff.strftime("%d/%m/%Y %H:%M") %></td>
-				<td><%= truncate(Team.find(game.home_team_id).name, :length => 20) %></td>
-				<td><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>
-				<% if game.home_score.nil? %>
-				<td> - : - </td>
-				<% else %>
-				<td><%= game.home_score %> : <%= game.away_score %></td>
-				<% end %>
-				<td><%= image_tag(Team.find(game.away_team_id).logo, :id => 'team_logo') %></td>
-				<td><%= truncate(Team.find(game.away_team_id).name, :length => 20) %></td>
-
-				<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
-
-				<% if @bet.empty? %>
-				<td>
-					<%= simple_form_for(@new_bet, :remote => true) do |f| %>
-				      <%= f.input :game_id, input_html: { value: game.id }, :as => :hidden %>
-				      <%= f.input :poll_id, input_html: { value: @poll.id }, :as => :hidden %>
-					  <% if game.kickoff < Time.now %>
-					    <%= f.number_field :home_bet, disabled: true %> :
-					    <%= f.number_field :away_bet, disabled: true %>
-					  <% else %>
-					    <%= f.number_field :home_bet, input_html: { min: 0 }, :class => 'submittable' %> :
-					    <%= f.number_field :away_bet, input_html: { min: 0 }, :class => 'submittable' %>
-					  <% end %>
-				    <% end %>
-				</td>
-				  <% else %>
-				<td><%= simple_form_for(@bet[0], :remote => true) do |f| %>
-				      <%= f.input :game_id, input_html: { value: game.id }, :as => :hidden %>
-				      <%= f.input :poll_id, input_html: { value: @poll.id }, :as => :hidden %>
-					  <% if game.kickoff < Time.now %>
-					    <%= f.number_field :home_bet, disabled: true %> :
-					    <%= f.number_field :away_bet, disabled: true %>
-					  <% else %>
-					    <%= f.number_field :home_bet, :class => 'submittable' %> :
-					    <%= f.number_field :away_bet, :class => 'submittable' %>
-					  <% end %>
-				    <% end %>
-				</td>
-				<% end%>
-				<% if @bet.empty? %>
-				  <td>0</td>
-				<% else %>
-				  <td><%= @bet[0].total_points %></td>
-				<% end %>
-			   </tr>
+<div class="responsive-table">
+  <div class="scrollable-area">
+    <table class="table" id="partidos">
+		<thead class='header'>
+		  <th class="col-sm-1">Fecha</th>
+		  <th class="col-sm-2">Local</th>
+		  <th class="col-sm-1">Res.</th>
+		  <th class="col-sm-2">Visitante</th>
+		  <th class="col-sm-2">Apuesta</th>
+		  <th class="col-sm-1">Puntos</th>
+		</thead>
+		<% @games.each do |game| %>
+		  <tr>
+			<td><%= game.kickoff.strftime("%d/%m/%Y %H:%M") %></td>
+			<td><%= truncate(Team.find(game.home_team_id).name, :length => 20) %> <%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>
+			<% if game.home_score.nil? %>
+			  <td> - : - </td>
+			<% else %>
+			  <td><%= game.home_score %> : <%= game.away_score %></td>
 			<% end %>
-			</tbody>
-		</table>
-	</div>
+			<td><%= image_tag(Team.find(game.away_team_id).logo, :id => 'team_logo') %> <%= truncate(Team.find(game.away_team_id).name, :length => 20) %></td>
+
+			<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
+
+			<% if @bet.empty? %>
+		      <% if game.kickoff < Time.now %>
+				<td> : </td>				
+			  <% else %>			
+				<td>
+				  <%= form_for @new_bet, :remote => true do |f| %>
+				    <%= f.hidden_field :game_id, { value: game.id } %>
+					<%= f.hidden_field :poll_id, { value: @poll.id } %>
+				    <%= f.text_field :home_bet, class: 'submittable' %> : <%= f.text_field :away_bet, class: 'submittable' %>
+			      <% end %>			
+				</td>
+			  <% end %>
+			
+			<% else %>
+			
+		 	  <% if game.kickoff < Time.now %>
+			    <td><%= @bet[0].home_bet %> : <%= @bet[0].away_bet %></td>				
+			  <% else %>
+				<td>
+				  <%= form_for @bet[0], :remote => true do |f| %>
+				    <%= f.hidden_field :game_id, { value: game.id } %>
+					<%= f.hidden_field :poll_id, { value: @poll.id } %>
+				    <%= f.text_field :home_bet, class: 'submittable' %> : <%= f.text_field :away_bet, class: 'submittable' %>
+			      <% end %>			
+				</td>			
+			  <% end %>
+							
+			<% end %>
+									
+			<% if @bet.empty? %>
+			  <td></td>
+			<% elsif game.home_score.nil? %>
+			  <td></td>
+ 			<% else %>
+			  <td><%= @bet[0].total_points %></td>
+			<% end %>
+		   </tr>
+		<% end %>
+		</tbody>		
+    </table>
+  </div>
+</div>

@@ -1,54 +1,71 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Pollon</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-  <%= favicon_link_tag 'favicon.ico' %>
+  <html>
+    <head>
+      <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+ 	  <title>El Pollon</title>
+	  <%= stylesheet_link_tag    "application", media: "all" %>
+	  <%= javascript_include_tag :application %>
+	  <%= csrf_meta_tags %>
+	  <%= favicon_link_tag 'favicon.ico' %>
+    </head>
+    <body class="contrast-grass-green">
+		<header>
+		  <nav class="navbar navbar-default navbar-fixed-top">
 
-</head>
-<body>
-    <div id="wrapper">
+		    <!-- application logo -->
+		    <a class="navbar-brand" href="/main">
+		      <!-- application logo visible on large screens -->
+		      <%= image_tag("pollon.svg", size: "21x21", title: 'El Pollón', class: "logo") %>
+		      <!-- application logo visible on small screens -->
+		      <%= image_tag("pollon.svg", size: "21x21", title: 'El Pollón', class: "logo-xs") %>
+		    </a>
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand"><a class="brand" id="brand" href="/main"><%= image_tag("pollon.svg", :id => 'nav_brand_logo', :class=>"img-rounded") %>El Pollón</a>
-                </li>
-                <li><%= link_to "Crear una polla", new_poll_path %></li>
-                <li><%= link_to "Unirme a una polla", join_path %></li>
-                <br />
-				<li class="divider"></li>
-				<li><a>Lista de pollas</a></li>
-				<ul id="polls-list">
-				<% current_user.polls.each do |poll| %>
-				  <li><%= link_to poll.name, poll_path(:id => poll.id), :class => "list-group-item"%></li>
-				<% end %>
-				</ul>	
-				<li class="divider"></li>
-				<li><%= link_to "Reglas", rules_path %></li>
-				<li><a class="brand" id="feedback" href="http://www.facebook.com/pages/El-Poll%C3%B3n/195032510704753">Feedback </a></li>				
-				<li><%= link_to current_user.name + "  -  Salida", signout_path, id: "sign_out" %></li>
-            </ul>
-        </div>
-
-        <!-- Page content -->
-        <div id="page-content-wrapper">
-          <div class="page-content inset">
-		    <% flash.each do |key, value| %>
-			  <div class="alert alert-<%= key %>"><%= value %>
-			    <button type="button" class="close" data-dismiss="alert">&times;</button>
-			  </div>
-			<% end %>
-			<%= yield %>
-          </div>
-        </div>
-
-    </div>
-
-</body>
-</html>
-
-
+		    <!-- main nav toggler (show/hide) -->
+		    <a class="toggle-nav btn pull-left" href="#">
+		      <i class="icon-reorder"></i>
+		    </a>
+		    <!-- dropdowns -->
+		    <ul class="nav">			
+			  <li class="dropdown dark user-menu">
+		        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				  <span class="user-name"><%= current_user.name %></span>
+				  <b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">					
+				  <li>
+					<a href="/signout">
+					   <i class="icon-signout"></i> Salir
+					</a>					
+				  </li>
+				</ul>
+			  </li>
+		    </ul>
+		  </nav>
+		</header>		
+	  <div id="wrapper">
+	    <div id="main-nav-bg"></div>
+		<nav class="main-nav-fixed" id="main-nav">
+		  <div class="navigation">
+		    <ul class="nav nav-stacked">
+		      <li class=""><a href="/main"><i class="icon-dashboard"></i><span>Página Pricipal</span></a></li>			
+		      <li class=""><a href="/rules"><i class="icon-legal"></i><span>Reglas</span></a></li>
+		      <li class=""><a href="/polls/new"><i class="icon-plus-sign-alt"></i><span>Crear polla</span></a></li>
+		      <li class=""><a href="/join"><i class="icon-group"></i><span>Unirme a una polla</span></a></li>		
+		      <li class=""><a href="http://www.facebook.com/pages/El-Poll%C3%B3n/195032510704753"><i class="icon-facebook-sign"></i><span>Contacto</span></a></li>        
+			</ul>
+		  </div>
+		</nav>
+		<section id="content">
+	      <div class="container">
+		  <<pseudo>></<pseudo>>
+	        <div class="row" id="content-wrapper">
+			<<pseudo>></<pseudo>>
+			  <div class="col-xs-12">
+				<%= yield %>								
+			  </div>	
+			</div>
+		  <div>
+		</section>
+	  </div>
+    </body>
+  </html>

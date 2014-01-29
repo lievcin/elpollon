@@ -5,13 +5,13 @@ gem 'rails', '4.0.2'
 
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
+gem "compass-rails"
 
 gem 'json'
 #gem 'twitter-bootstrap-rails'
 gem 'active_link_to'
 gem 'will_paginate'
 #gem 'bootstrap-will_paginate'
-gem 'bootstrap-datetimepicker-rails'
 gem 'browser-timezone-rails'
 
 gem 'quiet_assets'

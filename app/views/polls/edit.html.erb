@@ -1,8 +1,11 @@
-<%- model_class = Poll -%>
-<div class="page-header">
-  <h1>
-    <a id="menu-toggle" href="#" class="btn btn-mini"><i class="icon-align-justify"></i></a>
-	Editar Polla
-  </h1>
+<div class="page-header page-header-with-buttons">
+ <h1 class="pull-left">
+   <i class="icon-edit"></i>
+   <span>Editar Polla</span>
+ </h1>
 </div>
-<%= render :partial => 'form' %>
+
+
+<div class="box">
+  <%= render :partial => 'form' %>	
+</div>

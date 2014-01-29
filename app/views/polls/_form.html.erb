@@ -1,12 +1,30 @@
-<%= form_for @poll, :html => { :class => 'form-vertical' } do |f| %>
+<%= form_for @poll, :html => { :class => 'form form-horizontal' } do |f| %>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="inputName">Nombre de la polla</label>
+    <div class="col-md-5">
+      <%= f.text_field :name, placeholder: 'Nombre de la polla', id: 'inputName', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="inputClave">Clave</label>
+    <div class="col-md-5">
+      <%= f.text_field :group_key, placeholder: '6 a 20 letras.', id: 'inputClave', class: 'form-control'%>	
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="inputTorneo">Competencia</label>
+    <div class="col-md-5">
+      <%= f.select(:cup_id, Cup.all.map{|cup| [cup.name, cup.id]}, {},{id: 'inputTorneo', prompt: 'Elige la competencia' , class: 'form-control'}) %>
+    </div>
+  </div>
 
-  <p><%= f.text_field :name, placeholder: 'Nombre de la polla' %></p>
-  <p><%= f.text_field :group_key, placeholder: 'Clave', :hint => '6 a 20 letras.' %></p>
-  <p><%= f.select :cup_id, Cup.all.map{|cup| [cup.name, cup.id]}, prompt: 'Elige la competencia'%></p>
-
-  <div class="form-actions">
-    <%= f.submit 'Guardar polla', :class => 'btn btn-success'%>
-    <%= link_to 'Cancelar', main_path, :class => 'btn btn-danger' %>
+  <div class="form-actions form-actions-padding-sm">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-2">	
+        <%= f.submit 'Guardar polla', :class => 'btn btn-success'%>
+        <%= link_to 'Cancelar', main_path, :class => 'btn btn-danger' %>
+      </div>
+    </div>
   </div>
 
 <% end %>
