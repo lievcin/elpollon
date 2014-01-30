@@ -27,14 +27,16 @@ class Game < ActiveRecord::Base
 
   protected
   	
-   	def assign_points 	  
-   	  self.bets.each do |bet|
+   	def assign_points 	 
+   	  unless home_score.nil?   	   
+   	    self.bets.each do |bet|
 
- 				bet.total_points = [ full_points(bet.home_bet, bet.away_bet), 
-                             winner_points(bet.home_bet, bet.away_bet) +
-                             goal_diff_points(bet.home_bet, bet.away_bet) ].max + bonus_points(bet.home_bet, bet.away_bet)          
- 				bet.save!
- 	    end
+   				bet.total_points = [ full_points(bet.home_bet, bet.away_bet), 
+                               winner_points(bet.home_bet, bet.away_bet) +
+                               goal_diff_points(bet.home_bet, bet.away_bet) ].max + bonus_points(bet.home_bet, bet.away_bet)          
+   				bet.save!
+   	    end
+   	  end
     end
 
   	def full_points(home_bet, away_bet)
