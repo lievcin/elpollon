@@ -60,7 +60,7 @@
 			  <% @poll.users.each do |user| %>	
 				<tr>
 				  <td id="results"><%= user.name %></td>
-				  <td id="results"><%= user.games.where(round_id: round.id).map{|game| game.bets.where(poll_id: @poll.id, user_id: user.id)}.flatten.map{|bet| bet.total_points}.compact.sum %></td>			  
+				  <td id="results"><%= user.games.where(round_id: round.id).uniq.map{|game| game.bets.where(poll_id: @poll.id, user_id: user.id)}.flatten.map{|bet| bet.total_points}.compact.sum %></td>			  
 				  <% round.games.each do |game| %>			
   				    <% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", user.id, @poll.id, game.id) %>
 				    <% if @bet.empty? %>
