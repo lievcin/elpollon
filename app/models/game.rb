@@ -64,7 +64,7 @@ class Game < ActiveRecord::Base
   	end
 
   	def bonus_points(home_bet, away_bet)  	  
-  		if (goal_diff_points(home_bet, away_bet) == 4 || goal_diff_points(home_bet, away_bet) == 1) && (home_score + away_score >= 5)  		
+  		if goal_diff_points(home_bet, away_bet) == 4  && (home_score + away_score >= 5)  		
   			1
   		else
   			0
