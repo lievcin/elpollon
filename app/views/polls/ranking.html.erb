@@ -39,24 +39,45 @@
   </div>
 <div>
 	
-	<table class="table" id="partidos">
-		<thead class='header'>
-		  <th>Nombre</th>
-		  <th>Puntos</th>
-		  <th></th>		
-		</thead>
-		<tbody>
-			<% @rank_users.sort_by {|key, value| value}.reverse.each do |user_id, points| %>
-			  <tr>			
-				<td><%= User.find(user_id).name %></td>
-				<td><%= points[0] %></td>	
-				<% if current_user.id === @poll.admin_id %>
-				     <% unless user_id === current_user.id %>
-				     <td><%= link_to "Sacar de la polla",  kick_out_polls_path(:id => @poll.id, :user_id =>user_id), :confirm => 'Esta seguro?', class: "btn btn-xs btn-danger"  %></td>
-					 <% end %>
-				<% end %>
+	<%= high_chart("ranking_chart", @h) %>
+	
+	<%= will_paginate @rounds%>
+	
+	<% @rounds.each do |round| %>
+	<div class="responsive-table">
+	  <div class="scrollable-area">	
+		<table class="table">
+			<thead class='header'>
+			  <th id="results" class="col-sm-1">Nombre</th>
+			  <th id="results" class="col-sm-1">Pts</th>
+			  <% round.games.each do |game| %>			
+			    <th id="results" class="col-sm-1"><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo_mini', :title => Team.find(game.home_team_id).name) %> : <%= image_tag(Team.find(game.away_team_id).logo, :id => 'team_logo_mini', :title => Team.find(game.away_team_id).name) %> 
+					<br/><%= game.home_score %> : <%= game.away_score %> 
+					</th>
+			  <% end %>	
+			</thead>
+			<tbody>
+			  <% @poll.users.each do |user| %>	
+				<tr>
+				  <td id="results"><%= user.name %></td>
+				  <td id="results"><%= user.games.where(round_id: round.id).map{|game| game.bets.where(poll_id: @poll.id, user_id: user.id)}.flatten.map{|bet| bet.total_points}.compact.sum %></td>			  
+				  <% round.games.each do |game| %>			
+  				    <% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", user.id, @poll.id, game.id) %>
+				    <% if @bet.empty? %>
+				      <td id="results" class="col-sm-1"> - : - <br/><strong>0 pts.</strong></td>
+				    <% else %>
+				      <td id="results" class="col-sm-1"> <%= @bet[0].home_bet %> : <%= @bet[0].away_bet %> <br/><strong><%= @bet[0].total_points %> pts.</strong></td>
+				      <% game.bets.where(poll_id: @poll.id, user_id: user.id, game_id: game.id)[0].total_points %>			
+				
+				    <% end %>					
+				  <% end %>
+				</tr>					  
+			  <% end %>		
+			</tbody>
+		</table>
+	  </div>
+	</div>	
+	<% end %>
 
-			<% end %>
-		</tbody>
-	</table>
+
 </div>

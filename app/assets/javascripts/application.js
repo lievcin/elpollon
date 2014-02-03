@@ -8,6 +8,9 @@
 //= require flatty/plugins/plugins
 //= require flatty/theme
 //= require facebook_invite
+//= require highcharts/highcharts                                                           
+//= require highcharts/highcharts-more                                                         
+//= require highcharts/highstock
 
 $('.dropdown-toggle').dropdown()
 

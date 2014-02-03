@@ -1,4 +1,19 @@
+#ranking_chart {
+  height: 250px;  
+}
 
+#team_logo_mini {
+  width: 15px;
+  height: 15px;
+  margin-bottom: 0px;
+  font-size: 12px;
+}
+
+#results {
+  font-size: 11px;	
+  text-align: center;   
+  vertical-align: middle;
+}
 #partidos {
   font-size: 13px;
 }

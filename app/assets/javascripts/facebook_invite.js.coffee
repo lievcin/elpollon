@@ -2,7 +2,7 @@ $ ->
   $.ajaxSetup({ cache: true })
   $.getScript "//connect.facebook.net/en_UK/all.js", ->
     FB.init(
-      appId: 1435514109999765
+      appId: 1435514109999765		
       frictionlessRequests: true
       cookie: true
     )

@@ -110,15 +110,37 @@ class PollsController < ApplicationController
   def ranking
 		@poll = Poll.find(params[:id])
 		@rank_users = get_ranking(@poll)
-		#binding.pry
+		@graph_names = get_ranking_for_chart_names(@poll)
+		@graph_points = get_ranking_for_chart_points(@poll)		
+		
+    @h = LazyHighCharts::HighChart.new('graph') do |f|     
+        f.xAxis(categories: @graph_names,  :labels=>{:rotation=>-45 , :align => 'right'})
+        f.yAxis(
+          lineWidth: 0,
+          minorGridLineWidth: 0,
+          gridLineColor: 'transparent',
+          lineColor: 'transparent',
+          labels: {enabled: false},
+          title: {text: "Total de puntos polla"}
+        )
+        f.series(type: 'column', 
+                 name: 'total puntos',
+                 data: @graph_points,
+                 showInLegend: false, 
+                 dataLabels: {
+                   enabled: true,
+                   color: '#000000',
+                   style: {fontSize: '15px', fontFamily: 'Verdana, sans-serif'}
+                  }
+              )
+      end	
+      
+    @rounds = @poll.cup.rounds.page(params[:page]).per_page(1)
   end
 
   def members
 		@poll = Poll.find(params[:id])
   end
-
-
-
 
 private
 
@@ -134,5 +156,20 @@ private
 		return user_ranking
 	end
 
+	def get_ranking_for_chart_points(poll)
+		user_ranking = Array.new
+		poll.users.each do |user|
+		  user_ranking << user.bets.where(poll_id: poll.id).map{|bet| bet.total_points}.compact.sum
+		end
+		return user_ranking
+	end	
+
+	def get_ranking_for_chart_names(poll)
+		user_ranking = Array.new
+		poll.users.each do |user|
+		  user_ranking << user.name
+		end
+		return user_ranking
+	end	
 
 end
