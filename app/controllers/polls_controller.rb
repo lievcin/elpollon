@@ -121,14 +121,16 @@ class PollsController < ApplicationController
           lineColor: 'transparent',
           labels: {enabled: false},
           title: {text: "Total de puntos polla"}
-        )
+        )        
         f.series(type: 'column', 
                  name: 'total puntos',
                  data: @graph_points,
                  showInLegend: false, 
+                 color: '#5daf2b',
                  dataLabels: {
                    enabled: true,
                    color: '#000000',
+                   
                    style: {fontSize: '15px', fontFamily: 'Verdana, sans-serif'}
                   }
               )
