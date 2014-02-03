@@ -61,15 +61,18 @@
 				<tr>
 				  <td id="results"><%= user.name %></td>
 				  <td id="results"><%= user.games.where(round_id: round.id).uniq.map{|game| game.bets.where(poll_id: @poll.id, user_id: user.id)}.flatten.map{|bet| bet.total_points}.compact.sum %></td>			  
-				  <% round.games.each do |game| %>			
-  				    <% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", user.id, @poll.id, game.id) %>
-				    <% if @bet.empty? %>
-				      <td id="results" class="col-sm-1"> - : - <br/><strong>0 pts.</strong></td>
-				    <% else %>
-				      <td id="results" class="col-sm-1"> <%= @bet[0].home_bet %> : <%= @bet[0].away_bet %> <br/><strong><%= @bet[0].total_points %> pts.</strong></td>
-				      <% game.bets.where(poll_id: @poll.id, user_id: user.id, game_id: game.id)[0].total_points %>			
-				
-				    <% end %>					
+				  <% round.games.each do |game| %>	
+					<% if game.kickoff > Time.now %>
+			 	      <td id="results" class="col-sm-1"> - : - <br/><strong>0 pts.</strong></td>
+				    <% else %>				  
+	  				    <% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", user.id, @poll.id, game.id) %>
+					    <% if @bet.empty? %>
+					      <td id="results" class="col-sm-1"> - : - <br/><strong>0 pts.</strong></td>
+					    <% else %>
+					      <td id="results" class="col-sm-1"> <%= @bet[0].home_bet %> : <%= @bet[0].away_bet %> <br/><strong><%= @bet[0].total_points %> pts.</strong></td>
+					      <% game.bets.where(poll_id: @poll.id, user_id: user.id, game_id: game.id)[0].total_points %>							
+					    <% end %>					
+				    <% end %>				  					
 				  <% end %>
 				</tr>					  
 			  <% end %>		
