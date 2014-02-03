@@ -113,6 +113,7 @@ class PollsController < ApplicationController
 		@graph_names = get_ranking_names(@poll).sort_by {|k,v| v}.reverse.collect{|u, p| u}.flatten
 		@graph_points = get_ranking_names(@poll).sort_by {|k,v| v}.reverse.collect{|u, p| p}.flatten
     @h = LazyHighCharts::HighChart.new('graph') do |f|     
+        f.chart(:backgroundColor => '#f5f5f5' )
         f.xAxis(categories: @graph_names,  :labels=>{:rotation=>-45 , :align => 'right'})
         f.yAxis(
           lineWidth: 0,
@@ -129,8 +130,7 @@ class PollsController < ApplicationController
                  color: '#5daf2b',
                  dataLabels: {
                    enabled: true,
-                   color: '#000000',
-                   
+                   color: '#000000',                   
                    style: {fontSize: '15px', fontFamily: 'Verdana, sans-serif'}
                   }
               )
