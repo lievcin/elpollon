@@ -121,7 +121,7 @@ class PollsController < ApplicationController
           gridLineColor: 'transparent',
           lineColor: 'transparent',
           labels: {enabled: false},
-          title: {text: "Total de puntos polla"}
+          title: {text: "Total puntos"}
         )        
         f.series(type: 'column', 
                  name: 'total puntos',
