@@ -110,9 +110,8 @@ class PollsController < ApplicationController
   def ranking
 		@poll = Poll.find(params[:id])
 		@rank_users = get_ranking(@poll)
-		@graph_names = get_ranking_for_chart_names(@poll)
-		@graph_points = get_ranking_for_chart_points(@poll)		
-		
+		@graph_names = get_ranking_names(@poll).sort_by {|k,v| v}.reverse.collect{|u, p| u}.flatten
+		@graph_points = get_ranking_names(@poll).sort_by {|k,v| v}.reverse.collect{|u, p| p}.flatten
     @h = LazyHighCharts::HighChart.new('graph') do |f|     
         f.xAxis(categories: @graph_names,  :labels=>{:rotation=>-45 , :align => 'right'})
         f.yAxis(
@@ -156,20 +155,12 @@ private
 		return user_ranking
 	end
 
-	def get_ranking_for_chart_points(poll)
-		user_ranking = Array.new
+	def get_ranking_names(poll)
+		user_ranking = Hash.new {|h,k| h[k] = []}
 		poll.users.each do |user|
-		  user_ranking << user.bets.where(poll_id: poll.id).map{|bet| bet.total_points}.compact.sum
+		  user_ranking[user.name] << user.bets.where(poll_id: poll.id).map{|bet| bet.total_points}.compact.sum
 		end
-		return user_ranking
-	end	
-
-	def get_ranking_for_chart_names(poll)
-		user_ranking = Array.new
-		poll.users.each do |user|
-		  user_ranking << user.name
-		end
-		return user_ranking
-	end	
+		return user_ranking.sort.reverse
+	end
 
 end
