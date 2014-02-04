@@ -1,5 +1,5 @@
 
-$('.dropdown-toggle').dropdown()
+//$('.dropdown-toggle').dropdown()
 
 $( document ).on( "change", ".submittable", function() {
 
