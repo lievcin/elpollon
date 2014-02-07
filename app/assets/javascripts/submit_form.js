@@ -14,3 +14,4 @@ $( document ).on( "change", ".submittable", function() {
           }, '800', function() {
   });
 });
+

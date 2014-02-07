@@ -40,69 +40,85 @@
   </div>
 <div>
 
-<div class="responsive-table">
-  <div class="scrollable-area">
-    <table class="table" id="partidos">
-		<thead class='header'>
-		  <th class="col-sm-1">Fecha</th>
-		  <th class="col-sm-2">Local</th>
-		  <th class="col-sm-1">Res.</th>
-		  <th class="col-sm-2">Visitante</th>
-		  <th class="col-sm-2">Apuesta</th>
-		  <th class="col-sm-1">Puntos</th>
-		</thead>
-		<% @games.each do |game| %>
-		  <tr>
-			<td><%= game.kickoff.strftime("%d/%m/%Y %H:%M") %></td>
-			<td><%= truncate(Team.find(game.home_team_id).name, :length => 20) %> <%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo') %></td>
-			<% if game.home_score.nil? %>
-			  <td> - : - </td>
-			<% else %>
-			  <td><%= game.home_score %> : <%= game.away_score %></td>
-			<% end %>
-			<td><%= image_tag(Team.find(game.away_team_id).logo, :id => 'team_logo') %> <%= truncate(Team.find(game.away_team_id).name, :length => 20) %></td>
 
-			<% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
+	<ul id="filters" class="pagination">
+	    <li><a href="#" data-filter="*">Todas las fechas</a></li> 
+	  <% @poll.cup.rounds.each do |round| %>
+	    <li><a href="#" data-filter=".<%=round.leg%>"><%= round.leg %> Fecha</a></li> 
+	  <% end %>		
+	</ul>
+	
 
-			<% if @bet.empty? %>
-		      <% if game.kickoff < Time.now %>
-				<td> : </td>				
+	<div id="container" class="variable-sizes clearfix isotope">
+	<% @games.each do |game| %>
+	   <div class="<%=game.round.leg %> elementoFixture" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate3d(0px, 0px, 0px);">
+   	     <div class="fecha"><%= game.kickoff.strftime("%d/%m/%Y") %></div>
+         <div class="hora"><%= game.kickoff.strftime("%H:%M") %></div>
+         <div class="logoEquipo1"><%= image_tag(Team.find(game.home_team_id).logo, :id => 'fixture_team_logo') %></div>
+         <div class="nombreEquipo1"><%= truncate(Team.find(game.home_team_id).name, :length => 20) %></div>
+	     <div class="vs">VS</div>
+         <div class="logoEquipo2"><%=image_tag(Team.find(game.away_team_id).logo, :id => 'fixture_team_logo') %></div>     
+         <div class="nombreEquipo2"><%= truncate(Team.find(game.away_team_id).name, :length => 20) %></div>	 
+		 <div class="marcador">Marcador</div>
+		   <% if game.home_score.nil? %>
+		     <div class="marcadorEquipo1">-</div>
+		     <div class="marcador-dash">-</div>		
+		     <div class="marcadorEquipo2">-</div>	
+		   <% else %>
+		     <div class="marcadorEquipo1"><%= game.home_score %></div>
+		     <div class="marcador-dash">-</div>				
+		     <div class="marcadorEquipo2"><%= game.away_score %></div>	
+		   <% end %>
+		   
+		   <% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
+
+		   <div class="apuesta">Apuesta</div>
+		   <% if @bet.empty? %>
+		     <% if game.kickoff < Time.now %>
+				<div class="apuestaEquipo1">-</div>
+		        <div class="apuesta-dash">-</div>		
+		        <div class="apuestaEquipo2">-</div>				
 			  <% else %>			
-				<td>
-				  <%= form_for @new_bet, :remote => true do |f| %>
-				    <%= f.hidden_field :game_id, { value: game.id } %>
-					<%= f.hidden_field :poll_id, { value: @poll.id } %>
-				    <%= f.text_field :home_bet, class: 'submittable' %> : <%= f.text_field :away_bet, class: 'submittable' %>
-			      <% end %>			
-				</td>
+			    <%= form_for @new_bet, :remote => true do |f| %>
+				  <%= f.hidden_field :game_id, { value: game.id } %>
+				  <%= f.hidden_field :poll_id, { value: @poll.id } %>
+				  <%= f.text_field :home_bet, class: 'submittable apuestaEquipo1' %>
+			      <div class="apuesta-dash">-</div>						
+				  <%= f.text_field :away_bet, class: 'submittable apuestaEquipo2' %>
+			    <% end %>			
 			  <% end %>
 			
 			<% else %>
 			
 		 	  <% if game.kickoff < Time.now %>
-			    <td><%= @bet[0].home_bet %> : <%= @bet[0].away_bet %></td>				
+				<div class="apuestaEquipo1"><%= @bet[0].home_bet %></div>
+		        <div class="apuesta-dash">-</div>		
+		        <div class="apuestaEquipo2"><%= @bet[0].away_bet %></div>				
 			  <% else %>
-				<td>
-				  <%= form_for @bet[0], :remote => true do |f| %>
-				    <%= f.hidden_field :game_id, { value: game.id } %>
-					<%= f.hidden_field :poll_id, { value: @poll.id } %>
-				    <%= f.text_field :home_bet, class: 'submittable' %> : <%= f.text_field :away_bet, class: 'submittable' %>
-			      <% end %>			
-				</td>			
+			    <%= form_for @bet[0], :remote => true do |f| %>
+				  <%= f.hidden_field :game_id, { value: game.id } %>
+				  <%= f.hidden_field :poll_id, { value: @poll.id } %>
+				  <%= f.text_field :home_bet, class: 'submittable apuestaEquipo1' %> 
+			      <div class="apuesta-dash">-</div>						
+				  <%= f.text_field :away_bet, class: 'submittable apuestaEquipo2' %>
+			    <% end %>			
 			  <% end %>
 							
 			<% end %>
-									
+
 			<% if @bet.empty? %>
-			  <td></td>
+			  <div class="puntos"></div>
 			<% elsif game.home_score.nil? %>
-			  <td></td>
+			  <div class="puntos"></div>
  			<% else %>
-			  <td><%= @bet[0].total_points %></td>
+			  <div class="puntos"><%=pluralize(@bet[0].total_points, 'punto') %></div>
 			<% end %>
-		   </tr>
-		<% end %>
-		</tbody>		
-    </table>
-  </div>
-</div>
+      </div>
+	<% end %>	
+	</div>
+
+
+
+
+
+

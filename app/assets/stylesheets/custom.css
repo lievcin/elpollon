@@ -25,31 +25,6 @@
   font-size: 12px;
 }
 
-input#bet_home_bet {
-  width: 35px;
-  text-align: center;   
-}
-input#bet_away_bet {
-  width: 35px;
-  text-align: center;   
-}
-
-input#game_home_score {
-  width: 35px;
-}
-input#game_away_score {
-  width: 35px;
-}
-
-input#game_home_score_et {
-  width: 35px;
-}
-input#game_away_score_et {
-  width: 35px;
-}
-
-
-
 .header {
   background: #5daf2b;
   color: #fff;
