@@ -3,7 +3,7 @@ class Round < ActiveRecord::Base
 
 	has_many :games
 	belongs_to :cup
-	#has_many :bets, :through => :games
+	#has_many :teams, :through => :games
 
 	validates :name,	:presence => true
 	validates_uniqueness_of		:name, :scope => :cup_id

@@ -48,10 +48,17 @@
 	  <% end %>		
 	</ul>
 	
+	<ul id="filters" class="pagination">
+	    <li><a href="#" data-filter="*">Todas los equipos</a></li> 
+	  <% @poll.cup.games.map{|g| Team.find(g.home_team_id).acronym}.uniq.sort.each do |team| %>
+	    <li><a href="#" data-filter=".<%= team %>"><%= team %></a></li> 
+	  <% end %>		
+	</ul>
+	
 
 	<div id="container" class="variable-sizes clearfix isotope">
 	<% @games.each do |game| %>
-	   <div class="<%=game.round.leg %> elementoFixture" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate3d(0px, 0px, 0px);">
+	   <div class="<%=game.round.leg %> elementoFixture <%=Team.find(game.home_team_id).acronym %> <%=Team.find(game.away_team_id).acronym %>" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate3d(0px, 0px, 0px);">
    	     <div class="fecha"><%= game.kickoff.strftime("%d/%m/%Y") %></div>
          <div class="hora"><%= game.kickoff.strftime("%H:%M") %></div>
          <div class="logoEquipo1"><%= image_tag(Team.find(game.home_team_id).logo, :id => 'fixture_team_logo') %></div>
