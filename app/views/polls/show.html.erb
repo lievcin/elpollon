@@ -40,32 +40,72 @@
   </div>
 <div>
 
-
-	<ul id="filters" class="pagination">
-	    <li><a href="#" data-filter="*">Todas las fechas</a></li> 
-	  <% @poll.cup.rounds.each do |round| %>
-	    <li><a href="#" data-filter=".<%=round.leg%>"><%= round.leg %> Fecha</a></li> 
-	  <% end %>		
-	</ul>
+    <div class="row" id="content-wrapper">
+	  <div class="col-xs-6">
+		<ul id="filters" class="pagination option-set">
+		  <% @poll.cup.rounds.each do |round| %>
+		    <li><a href="#" data-filter=".<%=round.leg%>"><%= round.leg %> Fecha</a></li> 
+		  <% end %>	
+		  <li><a href="#" data-filter="*" id="">Todas las fechas</a></li> 			
+		</ul>
+	  </div>
+	  <div class="col-xs-6">
+		<ul id="filters" class="pagination option-set">
+		  <% @poll.cup.games.map{|g| Team.find(g.home_team_id).acronym}.uniq.sort.each do |team| %>
+		    <li><a href="#" data-filter=".<%= team %>"><%= team %></a></li> 
+		  <% end %>		
+		  <li><a href="#" data-filter="*">Todos los equipos</a></li> 		
+		</ul>	
+	  </div>		
+	</div>
 	
-	<ul id="filters" class="pagination">
-	    <li><a href="#" data-filter="*">Todas los equipos</a></li> 
-	  <% @poll.cup.games.map{|g| Team.find(g.home_team_id).acronym}.uniq.sort.each do |team| %>
-	    <li><a href="#" data-filter=".<%= team %>"><%= team %></a></li> 
-	  <% end %>		
-	</ul>
-	
-
 	<div id="container" class="variable-sizes clearfix isotope">
 	<% @games.each do |game| %>
 	   <div class="<%=game.round.leg %> elementoFixture <%=Team.find(game.home_team_id).acronym %> <%=Team.find(game.away_team_id).acronym %>" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate3d(0px, 0px, 0px);">
    	     <div class="fecha"><%= game.kickoff.strftime("%d/%m/%Y") %></div>
          <div class="hora"><%= game.kickoff.strftime("%H:%M") %></div>
+		   <% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
+
+			<% if @bet.empty? %>
+			  <% if game.home_score.nil? %>
+			    <div class="puntos"></div>
+			  <% else %>
+			    <div class="puntos">
+			       <span class="label label-danger">0 pts</span>												  			
+			    </div>
+			  <% end %>			
+			<% elsif game.home_score.nil? %>
+			  <div class="puntos"></div>
+			<% else %>
+			  <div class="puntos">
+				<% if @bet[0].total_points == 0 %>
+				  <span class="label label-danger">
+			        <%=pluralize(@bet[0].total_points, 'pt') %>
+				  </span>								
+				<% elsif @bet[0].total_points == 1 %>				
+				  <span class="label label-primary">
+			        <%=pluralize(@bet[0].total_points, 'pt') %>
+				  </span>				
+				<% elsif @bet[0].total_points == 2 %>								
+				  <span class="label label-info">
+			        <%=pluralize(@bet[0].total_points, 'pt') %>
+				  </span>				
+				<% elsif @bet[0].total_points == 4 %>												
+				  <span class="label label-success">
+			        <%=pluralize(@bet[0].total_points, 'pt') %>
+				  </span>				
+				<% elsif @bet[0].total_points == 5 %>																
+				  <span class="label label-warning">
+			        <%=pluralize(@bet[0].total_points, 'pt') %>
+				  </span>
+				<% end %>			
+			</div>
+			<% end %>			
          <div class="logoEquipo1"><%= image_tag(Team.find(game.home_team_id).logo, :id => 'fixture_team_logo') %></div>
-         <div class="nombreEquipo1"><%= truncate(Team.find(game.home_team_id).name, :length => 20) %></div>
+         <div class="nombreEquipo1"><%= truncate(Team.find(game.home_team_id).name, :length => 15) %></div>
 	     <div class="vs">VS</div>
          <div class="logoEquipo2"><%=image_tag(Team.find(game.away_team_id).logo, :id => 'fixture_team_logo') %></div>     
-         <div class="nombreEquipo2"><%= truncate(Team.find(game.away_team_id).name, :length => 20) %></div>	 
+         <div class="nombreEquipo2"><%= truncate(Team.find(game.away_team_id).name, :length => 15) %></div>	 
 		 <div class="marcador">Marcador</div>
 		   <% if game.home_score.nil? %>
 		     <div class="marcadorEquipo1">-</div>
@@ -77,7 +117,6 @@
 		     <div class="marcadorEquipo2"><%= game.away_score %></div>	
 		   <% end %>
 		   
-		   <% @bet = Bet.where("user_id = ? and poll_id = ? and game_id = ?", current_user.id, @poll.id, game.id) %>
 
 		   <div class="apuesta">Apuesta</div>
 		   <% if @bet.empty? %>
@@ -113,13 +152,6 @@
 							
 			<% end %>
 
-			<% if @bet.empty? %>
-			  <div class="puntos"></div>
-			<% elsif game.home_score.nil? %>
-			  <div class="puntos"></div>
- 			<% else %>
-			  <div class="puntos"><%=pluralize(@bet[0].total_points, 'punto') %></div>
-			<% end %>
       </div>
 	<% end %>	
 	</div>

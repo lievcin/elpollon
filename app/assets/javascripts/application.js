@@ -22,6 +22,11 @@ $(function(){
 	// filter items when filter link is clicked
 	$('#filters a').click(function(){
 	  var selector = $(this).attr('data-filter');
+
+	  var $optionSet = $(this).parents('.option-set');
+      $optionSet.find('.selected').removeClass('selected');
+      $(this).addClass('selected');
+
 	  $container.isotope({ filter: selector });
 	  return false;
 	});
