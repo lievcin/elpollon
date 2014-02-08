@@ -41,23 +41,25 @@
 <div>
 
     <div class="row" id="content-wrapper">
-	  <div class="col-xs-6">
+	  <div class="col-xs-12">
 		<ul id="filters" class="pagination option-set">
 		  <% @poll.cup.rounds.each do |round| %>
 		    <li><a href="#" data-filter=".<%=round.leg%>"><%= round.leg %> Fecha</a></li> 
 		  <% end %>	
-		  <li><a href="#" data-filter="*" id="">Todas las fechas</a></li> 			
-		</ul>
-	  </div>
-	  <div class="col-xs-6">
-		<ul id="filters" class="pagination option-set">
+		  <li><a href="#" data-filter="*" id="">Todas las fechas</a></li> 
+		
+		  <br/>
+		  <br/>
+		  <br/>
+		  <br/>
+		
 		  <% @poll.cup.games.map{|g| Team.find(g.home_team_id).acronym}.uniq.sort.each do |team| %>
 		    <li><a href="#" data-filter=".<%= team %>"><%= team %></a></li> 
 		  <% end %>		
 		  <li><a href="#" data-filter="*">Todos los equipos</a></li> 		
-		</ul>	
-	  </div>		
-	</div>
+		
+		</ul>
+	  </div>	
 	
 	<div id="container" class="variable-sizes clearfix isotope">
 	<% @games.each do |game| %>
