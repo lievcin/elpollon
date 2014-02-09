@@ -1,5 +1,5 @@
 class Round < ActiveRecord::Base
-  attr_accessible :name, :leg, :cup_id, :description, :round_type
+  attr_accessible :name, :leg, :cup_id, :description, :round_type, :short_name
 
 	has_many :games
 	belongs_to :cup
