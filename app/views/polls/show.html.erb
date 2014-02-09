@@ -43,7 +43,7 @@
     <div class="row" id="content-wrapper">
 	  <div class="col-xs-12">
 		<ul id="filters" class="pagination option-set">
-		  <% @poll.cup.rounds.each do |round| %>
+		  <% @poll.cup.rounds.order(:leg).each do |round| %>
 		    <li><a href="#" data-filter=".<%=round.leg%>"><%= round.short_name %></a></li> 
 		  <% end %>	
 		  <li><a href="#" data-filter="*" id="">Todas las jornadas</a></li> 
