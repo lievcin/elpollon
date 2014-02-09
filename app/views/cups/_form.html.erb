@@ -1,13 +1,30 @@
-<%= simple_form_for(@cup) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-	<%= f.input :description %>
-	<%= f.input :logo %>	
+<%= form_for @cup, :html => { :class => 'form form-horizontal' } do |f| %>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="inputName">Nombre de la competencia</label>
+    <div class="col-md-5">
+      <%= f.text_field :name, placeholder: 'Nombre de la competencia', id: 'inputName', class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="inputClave">Description</label>
+    <div class="col-md-5">
+      <%= f.text_field :description, id: 'inputClave', class: 'form-control'%>	
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-md-2 control-label" for="inputTorneo">logo</label>
+    <div class="col-md-5">
+      <%= f.text_field :logo, id: 'inputClave', class: 'form-control'%>	
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-actions form-actions-padding-sm">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-2">	
+        <%= f.submit 'Guardar torneo', :class => 'btn btn-success'%>
+        <%= link_to 'Cancelar', main_path, :class => 'btn btn-danger' %>
+      </div>
+    </div>
   </div>
+
 <% end %>
