@@ -2,6 +2,20 @@
   height: 250px;  
 }
 
+#cup_logo_new_poll {
+  width: 50px;
+  height: 50px;
+}
+
+#new_poll_radio {
+  margin-left: 10px;	
+}
+
+#cup_choice {
+  width: 70px;	
+  height: 70px;	
+}
+
 #team_logo_mini {
   width: 15px;
   height: 15px;

@@ -13,8 +13,10 @@
   </div>
   <div class="form-group">
     <label class="col-md-2 control-label" for="inputTorneo">Competencia</label>
-    <div class="col-md-5">
-      <%= f.select(:cup_id, Cup.all.map{|cup| [cup.name, cup.id]}, {},{id: 'inputTorneo', prompt: 'Elige la competencia' , class: 'form-control'}) %>
+    <div class="col-md-5">	
+		<% Cup.all.each do |cup| %>
+		    <%= f.radio_button(:cup_id, cup.id, id: 'new_poll_radio') %> <%= image_tag(cup.logo, id: 'cup_logo_new_poll', title: cup.name) %>
+		<% end %>
     </div>
   </div>
 
