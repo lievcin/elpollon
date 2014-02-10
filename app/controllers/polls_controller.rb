@@ -136,7 +136,7 @@ class PollsController < ApplicationController
               )
       end	
       
-    @rounds = @poll.cup.rounds.page(params[:page]).per_page(1)
+    @rounds = @poll.cup.rounds.order(:leg).page(params[:page]).per_page(1)
   end
 
   def members
