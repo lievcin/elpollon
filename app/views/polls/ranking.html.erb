@@ -50,7 +50,7 @@
 			<thead class='header'>
 			  <th id="results" class="col-sm-1">Nombre</th>
 			  <th id="results" class="col-sm-1">Pts</th>
-			  <% round.games.order(:kickoff).each do |game| %>			
+			  <% round.games.each do |game| %>			
 			    <th id="results" class="col-sm-1"><%= image_tag(Team.find(game.home_team_id).logo, :id => 'team_logo_mini', :title => Team.find(game.home_team_id).name) %> : <%= image_tag(Team.find(game.away_team_id).logo, :id => 'team_logo_mini', :title => Team.find(game.away_team_id).name) %> 
 					<br/><%= game.home_score %> : <%= game.away_score %> 
 					</th>
@@ -61,7 +61,7 @@
 				<tr>
 				  <td id="results"><%= user.name %></td>
 				  <td id="results"><%= user.games.where(round_id: round.id).uniq.map{|game| game.bets.where(poll_id: @poll.id, user_id: user.id)}.flatten.map{|bet| bet.total_points}.compact.sum %></td>			  
-				  <% round.games.order(:kickoff).each do |game| %>	
+				  <% round.games.each do |game| %>	
 					<% if game.kickoff > Time.now %>
 			 	      <td id="results" class="col-sm-1"> - : - <br/><strong>0 pts.</strong></td>
 				    <% else %>				  
