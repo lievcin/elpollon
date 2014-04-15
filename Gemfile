@@ -27,8 +27,13 @@ gem 'local_time'
 
 
 # Use mysql as the database for Active Record
-gem 'mysql2'
-gem 'pg'
+group :development, :test do
+    gem 'mysql2'
+end
+
+group :production do
+    gem 'pg'
+end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
