@@ -14,7 +14,7 @@ gem 'json'
 gem 'active_link_to'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
-gem 'browser-timezone-rails'
+# gem 'browser-timezone-rails'
 gem 'lazy_high_charts' 
 
 gem 'quiet_assets'
@@ -23,10 +23,13 @@ gem 'simple_form'
 gem 'password_reveal_input-simple_form'
 gem 'country_select'
 gem 'protected_attributes'
+gem 'local_time'
+
 
 # Use mysql as the database for Active Record
 gem 'mysql2'
-gem 'pg'
+# gem 'pg'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

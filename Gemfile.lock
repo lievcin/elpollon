@@ -41,9 +41,6 @@ GEM
     atomic (1.1.14)
     bootstrap-will_paginate (0.0.7)
       will_paginate
-    browser-timezone-rails (0.0.7)
-      jquery-rails
-      rails (>= 3.1)
     builder (3.1.4)
     chunky_png (1.2.9)
     coderay (1.1.0)
@@ -85,6 +82,8 @@ GEM
     lazy_high_charts (1.5.1)
       bundler (>= 1.0)
       hash-deep-merge
+    local_time (1.0.0)
+      coffee-rails
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -113,7 +112,6 @@ GEM
     password_reveal_input-simple_form (1.0.0)
       jquery-rails
       simple_form
-    pg (0.17.1)
     polyglot (0.3.3)
     protected_attributes (1.0.5)
       activemodel (>= 4.0.1, < 5.0)
@@ -196,7 +194,6 @@ PLATFORMS
 DEPENDENCIES
   active_link_to
   bootstrap-will_paginate
-  browser-timezone-rails
   coffee-rails (~> 4.0.0)
   compass-rails
   country_select
@@ -204,11 +201,11 @@ DEPENDENCIES
   jquery-rails
   json
   lazy_high_charts
+  local_time
   masonry-rails
   mysql2
   omniauth-facebook
   password_reveal_input-simple_form
-  pg
   protected_attributes
   pry-rails
   quiet_assets

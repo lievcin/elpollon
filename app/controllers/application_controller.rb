@@ -5,6 +5,13 @@ class ApplicationController < ActionController::Base
   before_filter :ensure_user
   before_filter :ensure_manager
 
+  # before_filter :set_timezone 
+
+  # def set_timezone  
+  #  min = request.cookies["time_zone"].to_i
+  #  Time.zone = ActiveSupport::TimeZone[-min.minutes]
+  # end
+  
 private
 
   def current_user
