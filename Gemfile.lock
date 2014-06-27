@@ -94,7 +94,6 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     multipart-post (1.2.0)
-    mysql2 (0.3.14)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -204,7 +203,6 @@ DEPENDENCIES
   lazy_high_charts
   local_time
   masonry-rails
-  mysql2
   omniauth-facebook
   password_reveal_input-simple_form
   pg
