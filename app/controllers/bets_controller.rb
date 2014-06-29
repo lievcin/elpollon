@@ -21,7 +21,7 @@ class BetsController < ApplicationController
 
   def create
   	@bet = Bet.new(bet_attributes)
-      if @bet.game.kickoff < Time.now 
+      if Time.zone.now < @bet.game.kickoff
   	
     		if @bet.save
     			redirect_to :back
@@ -36,7 +36,7 @@ class BetsController < ApplicationController
   def update
         
   	@bet = Bet.find(params[:id])
-      # if @bet.game.kickoff < Time.now 
+      if Time.zone.now < @bet.game.kickoff
       
     		if @bet.update_attributes(bet_attributes)
     			flash[:success] = "Apuesta actualizada."
@@ -45,7 +45,7 @@ class BetsController < ApplicationController
     			flash[:error] = "Ha ocurrido un error!"
     			redirect_to :back
     		end
-      # end
+      end
 			
   end
 
