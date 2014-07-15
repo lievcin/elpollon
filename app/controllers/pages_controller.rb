@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 	end
 
 	def main
-		@games = current_user.games.where("kickoff > ?", Time.now).order(:kickoff).uniq.limit(20)
+		@games = current_user.games.uniq.limit(20)
 		#@games = current_user.games.order(:kickoff).uniq
 	end
 
